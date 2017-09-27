@@ -1,0 +1,51 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch9/iframe-map-overlay.html" />
+    <title>The AMP Book News Daily</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+      <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>      
+   <style amp-custom>
+      html {overflow:hidden;}
+      body {
+        height:100%;
+        overflow-y:scroll;
+        width:100%;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Arial;
+      }
+      .fullsize {position:fixed;width:100%;height:100%;}
+      .header {
+        position:fixed;
+        height: 60px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.75);;
+        z-index:9999;
+        box-shadow: 0px 2px 6px rgba(0,0,0,.3);
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="header" >
+      <h1>amp-iframe map overlay</h1>
+    </div>
+    <amp-iframe class="fullsize" layout="fill"
+      sandbox="allow-scripts allow-same-origin"
+      allowfullscreen
+      src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJK_hq758OZ0gRc-q7KyQHvqo&key=AIzaSyCNCZ0Twm_HFRaZ5i-FuPDYs3rLwm4_848">
+      <amp-img layout="fill"
+        src="img/placeholder.png"
+        placeholder></amp-img>
+    </amp-iframe>
+
+  </body>
+</html>

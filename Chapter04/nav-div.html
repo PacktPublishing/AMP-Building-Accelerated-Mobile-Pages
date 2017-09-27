@@ -1,0 +1,166 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch4/nav-div.html" />
+    <title>The AMP Book News Daily</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|PT+Sans" rel="stylesheet"> 
+
+    <style amp-custom>
+      html, body, ul {
+        margin:0;
+        padding:0;
+        font-family: 'Droid Serif', serif;
+      }
+      header {
+        background-color: #005689;
+        padding:0.5rem;
+      }
+  
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      nav {
+        position: relative;
+      }
+      .primary-nav {white-space: nowrap;overflow-x: scroll;}
+
+      .primary-nav a {
+        font-family: 'PT Sans', sans-serif;
+        color:#fff;
+        font-size: 1.5rem;
+      }
+
+      .primary-nav a {
+        text-decoration:none;
+        padding-right: 1rem;
+      }    
+
+      header li {
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      h2 {
+        color: #005689;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        margin:5px;
+      }
+
+      img.feature-img {
+        width: 100%;
+      }
+      p {
+        padding:0.5rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        color: #dcdcdc;
+        background: #484848;
+        padding:0.5rem;
+      }
+
+
+      .drop-caps::first-letter {
+        color: #903;
+        float: left;
+        font-family: Georgia;
+        font-size: 3.5rem;
+        line-height: 3rem;
+        padding-top: 5px;
+        padding-right: 8px;
+        padding-left: 3px;
+      }
+
+
+      /* Navigation */
+      .fade::after {
+        content:'';
+        width:20%;
+        height:2rem;    
+        position:absolute;
+        right:0;
+        bottom:0;
+        background:linear-gradient(to right, rgba(0,86,137,0) 1%,rgba(0,86,137,1) 100%);
+        pointer-events: none;
+      }
+
+      .image-credit, .image-credit a {
+        color:#666;
+      }      
+
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo">theampbook</div>
+      <nav>
+        <div class="primary-nav fade">
+          <ul>
+             <li><a href="#">news</a></li>
+             <li><a href="#">sports</a></li>
+             <li><a href="#">arts</a></li>
+             <li><a href="#">tech</a></li>
+             <li><a href="#">education</a></li>
+             <li><a href="#">health</a></li>
+             <li><a href="#">entertainment</a></li>
+             <li><a href="#">living</a></li>
+             <li><a href="#">politics</a></li>
+          </ul>
+        </div>
+
+      </nav>
+    </header>
+    <article>
+      <h1>Breaking: AMP is fast</h1>
+      <amp-img src = "img/feature.jpg"  
+            srcset = "img/feature-1200.jpg 1200w,
+                      img/feature-lrg.jpg 1080w,
+                      img/feature-med.jpg 768w,
+                      img/feature.jpg 320w"
+             width = "768"
+            height = "305"
+            layout = "responsive" 
+            noloading>
+            <amp-img placeholder
+                     src="img/feature-tiny.jpg"
+                     width="768"
+                     height="305"  
+                     layout="responsive">
+            </amp-img>
+      </amp-img>
+      <small class="image-credit"><em>Image: <a href="https://www.flickr.com/photos/quintanomedia/14979389447">Anthony Quintano / Flickr</a></em></small>       
+      <p class="drop-caps">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis at ligula sit amet pellentesque. Proin cursus malesuada aliquet. Aenean volutpat ultricies ipsum, in condimentum risus sagittis vitae. Suspendisse quam mauris, molestie sed consectetur sed, pretium in tortor.</p>
+
+
+      <p>Donec sollicitudin risus ac odio commodo vestibulum. Cras semper convallis turpis, ut pharetra quam ultricies quis. Vivamus sagittis diam tellus. Quisque efficitur ante et nunc elementum sagittis.</p>
+
+
+
+    </article>
+    <footer id="footer">
+      privacy policy
+    </footer>
+  </body>
+</html>

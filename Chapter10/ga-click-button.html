@@ -1,0 +1,83 @@
+<!-- Tracks button clicks in Google Analytics -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch10/ga-click-button.html" />
+    <title>The AMP Book | amp-analytics</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <style amp-custom>
+      body {
+        font-family: Arial;
+        width:100%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0.5rem;
+      } 
+      button {
+        width:140px;
+        line-height: 30px;
+        vertical-align: middle;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        border: 2px solid #333;
+        color:#fff;
+        background-color: #253b48;     
+        margin:0.5rem 0.1rem 1.5rem;   
+        padding:0;
+        text-transform: uppercase;
+      }      
+    </style> 
+
+  </head>
+  <body>
+    <amp-analytics type="googleanalytics">
+    <script type="application/json">
+    {
+      "vars": {
+        "account": "UA-103053267-1"
+      },
+      "triggers": {
+        "trackPageview": {
+          "on": "visible",
+          "request": "pageview"
+        },
+        "buttonClickTracker": {
+          "on": "click",
+          "selector": "button",
+          "request": "event",
+          "vars": {
+            "eventCategory": "Click tracking",
+            "eventAction": "click button"
+          }
+        }
+      }
+    }
+    </script>
+    </amp-analytics>
+
+
+      <h1>amp-analytics click</h1>
+      <button on="tap:msg.show" data-vars-button-id="Click me button">Click me!</button><br />
+      
+      <div id="msg" hidden>
+        <p>An analytics event request was sent! Check the browser dev tools to see the request.</p>
+        <p>You should be able to see the event in Google Analytics under Behavior > Events > Overview (you'll need to use your own account id)</p>
+      </div>
+
+      <button on="tap:msg2.show" data-vars-event-label="Another button">Click me too!</button>
+        <div id="msg2" hidden>
+        <p>An analytics event request was sent! This time a different button id value was sent with the request</p>
+        </div>
+
+  </body>
+</html>

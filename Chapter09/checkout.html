@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|PT+Sans" rel="stylesheet"> 
+    <style>
+      body {text-align: center;}
+      #btn-pay {
+        width:140px;
+        line-height: 30px;
+        vertical-align: middle;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        background: none;
+        border: 2px solid #333;
+        color: #253b48;
+        margin:0.5rem 0.1rem 1.5rem;
+        padding:0;
+        text-transform: uppercase;
+        font-family: 'PT Sans', sans-serif;
+      }
+      #status {
+        width:100%;
+      }
+
+    </style>
+  </head>
+<body>
+<button id="btn-pay">Checkout</button>
+<div id="status"></div>
+<script>
+  document.addEventListener('DOMContentLoaded',function(e){
+    document.getElementById('btn-pay').addEventListener('click', makePayment);
+  });
+
+  function makePayment() {
+
+    //Check for support
+    if (!window.PaymentRequest) {
+      document.getElementById('status').innerHTML = "Sorry, Payment Request API not supported on this browser";
+      return;
+    }
+
+    var cartTotalPrice = 0;
+    var cartItems = [];
+    fetch('cart.php', {credentials: 'include'})
+      .then((resp) => resp.json()) // Transform the data into json
+      .then(function(cart) {
+        //console.log(cart.cart[0]);
+        var cart = cart.cart[0];
+        cartTotalPrice = cart.cart_total_price;
+        cart.cart_items.map(function(item) {
+          cartItems.push({"label":item.product_name+' €'+item.price+' x '+item.quantity,"amount":{"currency":"EUR", "value":item.price*item.quantity}});
+        });
+        //console.log(cartItems);
+      }).then(function() {
+
+        // Now for the fun stuff
+        var methodData = [{supportedMethods: ["visa", "mastercard"]}];
+
+        //Set some details
+        var details = {
+          total: {label: 'Total', amount: {currency: 'EUR', value: cartTotalPrice}},
+          displayItems: cartItems};
+
+        //Set some options
+        var options = {
+          requestShipping: false,
+          requestPayerEmail: false,
+          requestPayerPhone: false    
+        }
+
+        //Finally we can build the request
+        var paymentRequest = new PaymentRequest(methodData, details, options);
+        return paymentRequest;
+      }).then(function(paymentRequest) {
+        return paymentRequest.show();
+      }).then(function(paymentResponse) {
+        console.log(paymentResponse);
+        // Get payment info
+        var paymentInfo = {
+          methodName: paymentResponse.methodName,
+          details:    paymentResponse.details
+        }
+
+        //Send to payment gatway or processer
+        //Simulate this for now, our page will always return a 200 response
+        var params = {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(paymentInfo)
+        };
+
+        // Process the payment
+        return fetch('process-payment.html', params).then(function(response) {
+          if(response.status == 200) {
+            //return paymentResponse.complete('success');
+            // Redirect to success page if we get a success response
+            top.window.location.href = 'https://theampbook.com/ch8/checkout-complete.html';
+          }
+          else {
+            return paymentResponse.complete('fail');
+          }
+        }).then(function() {
+            document.getElementById('status').innerHTML = 'Order complete!';
+        }).catch(function(err) {
+          return paymentResponse.complete('fail');
+        });
+
+    }).catch(function(err) {
+      document.getElementById('status').innerHTML = 'Could not complete transaction at this time';
+    });
+  }  
+</script>
+</body>
+</html>
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow, geocoder, destination;
+      function initMap() {
+
+        // Create geocoder object
+        geocoder = new google.maps.Geocoder();
+
+        // These will handle the directions & route
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 53.0982471, lng: -9.7358862},
+          zoom:2
+        });
+        infoWindow = new google.maps.InfoWindow;
+        directionsDisplay.setMap(map);
+
+
+
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(location) {
+            var pos = {
+              lat: location.coords.latitude,
+              lng: location.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('You are here!');
+            infoWindow.open(map);
+            map.setCenter(pos);
+            map.setZoom(16);
+
+            //Do we have something to geocode?
+            var queryParams = window.location.search.substr(1).split('&').reduce(function (q, query) {
+              var chunks = query.split('=');
+              var key = chunks[0];
+              var value = chunks[1];
+              return (q[key] = value, q);
+            }, {});
+
+
+            if(queryParams.q) {
+              geocoder.geocode( { 'address': queryParams.q}, function(results, status) {
+                if (status == 'OK') {
+                  destination = results[0].geometry.location; 
+                                   
+                  calculateAndDisplayRoute(directionsService, directionsDisplay, position, destination);
+                } else {
+                  console.log('Geocode was not successful for the following reason: ' + status);
+                }
+              });          
+            }
+
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay, start, end) {
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            console.log('Directions request failed due to ' + status);
+          }
+        });
+      }
+
+      
+
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFyytDUOrJTPZn316KSzcrgNEoylS7w3k&callback=initMap">
+    </script>
+  </body>
+</html>

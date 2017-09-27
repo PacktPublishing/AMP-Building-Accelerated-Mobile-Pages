@@ -1,0 +1,74 @@
+<!-- amp-bind: basic text manipulation example -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch8/amp-bind-state.html" />
+    <title>The AMP Book</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script> 
+
+    <style amp-custom>
+      .main { 
+        width:100%;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Helvetica;
+      }
+
+      h3 {
+        color: #253b48;  
+        margin: 10px 0 0 0;
+      }
+
+      button, input{
+        width:140px;
+        line-height: 40px;
+        vertical-align: middle;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        background: none;
+        border: 2px solid #333;
+        color: #253b48;      
+        margin:10px auto;  
+        padding:0;
+      }
+
+      input {
+        padding: 0 5px;
+        box-sizing: content-box;
+        -webkit-appearance: none;
+        border-radius:0;
+      }
+
+      input[type="submit"] {
+        color:#fff;
+        background-color: #253b48;
+      }
+
+    </style>
+
+  </head>
+  <body class="main">
+  <amp-state id="user">
+    <script type="application/json">
+    {
+    "username": "ruadhan",
+    "address": {
+      "street": "18 Camden Street Lower",
+      "city": "Dublin",
+      "country": "Ireland"
+      }
+    }
+    </script>
+  </amp-state>
+  <h3>amp-bind example</h3>
+
+  <p>This example set some state data with <pre>&lt;amp-state&gt;</pre></p>
+  <p>You can view the state by typing AMP.printState() into the developer console when AMP is in development mode (#development=1 added to page URL)</p>
+
+  </body>
+</html>

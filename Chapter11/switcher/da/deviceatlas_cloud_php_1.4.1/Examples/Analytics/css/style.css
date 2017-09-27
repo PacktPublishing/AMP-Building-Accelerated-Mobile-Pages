@@ -1,0 +1,60 @@
+html, body, p, td, th, span, h1, h2, h3, ul, li {
+  font-family: Helvetica,Arial,"Lucida Grande",sans-serif;
+  font-size: 14px;
+  color: #222;
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+}
+
+body {
+  border: 7px solid #b6dcfd;
+  margin: 0px auto;
+  width: 890px;
+}
+
+h1 {
+  font-size: 20px;
+  padding: 10px;
+  background-color: #e8e8e8;
+  margin-bottom: 3px;
+}
+
+h2 {
+  font-size: 16px;
+  padding: 20px 50px;
+}
+
+table {
+  margin: 10px auto;
+}
+
+th {
+  text-align: left;
+  background-color: #eee;
+  border: 2px solid #ddd;
+  font-weight: normal;
+  padding: 3px;
+}
+
+td {
+  padding: 3px;
+  border-bottom: 1px dotted #ccc;
+}
+
+td.name {
+  width: 170px;
+}
+
+td.hits {
+  width: 80px;
+}
+
+td.line {
+  width: 215px;
+}
+
+td.line div {
+  height: 4px;
+  background-color: #b6dcfd;
+}

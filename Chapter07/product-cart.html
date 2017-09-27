@@ -1,0 +1,838 @@
+<!-- Demonstrates product page with
+     amp-list to fetch cart items on page load, and
+     amp-form for add-to-cart functionality -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch7/product-cart.html" />
+    <title>The AMP Store</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|PT+Sans" rel="stylesheet"> 
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>   
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script> 
+    <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script> 
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+
+
+    <style amp-custom>
+      html, body, ul {
+        margin:0;
+        padding:0;
+        font-family: 'Droid Serif', serif;
+      }
+      header {
+        background-color: #232f3e;
+        padding:0.5rem;
+      }
+
+      body {
+        margin-bottom: 20px;
+      }
+
+      .header, .main-content, main {
+        max-width: 1024px;
+        margin: 0 auto;
+      }      
+
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      .primary-nav li, .primary-nav span, .primary-nav a {
+        font-family: 'PT Sans', sans-serif;
+        color:#fff;
+        font-size: 1.5rem;
+      }
+
+      .primary-nav a {
+        text-decoration:none;
+        padding-right: 0.5rem;
+      }                 
+
+      header li {
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        padding-right: 10px;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      h2 {
+        color: #005689;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        margin:5px;
+      }
+
+      h2.main-content {
+        padding: 0.5rem 0 0 0.5rem;
+      }      
+
+      img.feature-img {
+        width: 100%;
+      }
+      p {
+        padding:0.5rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        height: 30px;
+        color: #dcdcdc;
+        background: #484848;
+        width:100%;
+      } 
+      
+      footer a {
+        color: #dcdcdc;
+      } 
+
+      footer .main-content {
+        padding: 0.25rem 0.5rem;
+      }
+
+      @media (min-height:1200px) {
+        footer {
+          position: fixed;
+          bottom:0;
+        }
+      }
+
+      .image-credits {
+        position: fixed;
+        bottom:30px;
+        height: 20px;
+        color: #777;
+        background: #fff;
+        padding:0.5rem;
+        width:100%;        
+      }
+
+      .image-credits a {
+        color:#666;
+      } 
+
+      header .amp-carousel-button {
+        background:0;
+      }
+
+      header .amp-carousel-button-next {
+        right:0;
+      }
+
+      header .amp-carousel-button-prev {
+        left:0;
+      }
+
+      header .amp-carousel-button-next::after {
+        content: '⟩';
+        right:0;
+        text-align: right;
+        background:linear-gradient(to right, rgba(35,47,62,0) 0%,rgba(35,47,62,1) 50%);
+        color: #fff;
+        position: absolute;
+        bottom:0;
+        font-size: 2rem;
+        line-height: 2rem;
+        font-weight: bold;
+        width:20px;
+        cursor: pointer;
+      }
+
+      header .amp-carousel-button-prev::after {
+        content: '⟨';
+        left:0;
+        text-align:left;  
+        background:linear-gradient(to left, rgba(35,47,62,0) 0%,rgba(35,47,62,1) 50%);
+        color: #fff;
+        position: absolute;
+        bottom:0;
+        width:20px;
+        font-size: 2rem;
+        line-height: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+
+      }     
+
+      #sidenav {
+        background-color: #232f3e;
+        width: 305px;
+        -moz-box-shadow: 0.2rem 0 1rem rgba(0,0,0,0.5);
+        -webkit-box-shadow:0.2rem 0 1rem rgba(0,0,0,0.5);
+        box-shadow: 0.2rem 0 1rem rgba(0,0,0,0.5);
+        text-align: right;
+      }
+
+      #sidenav li, #sidenav h3 {
+        font-family: 'PT Sans', sans-serif;       
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        list-style: none;
+        border:0;
+        border-bottom: 1px solid #253b48;
+        text-align: left;  
+        color: #fff;
+        font-weight: normal;
+        outline: none;       
+      }
+
+      #sidenav section, #sidenav h3 {
+        background-color: #232f3e;
+      }
+
+      #sidenav h3 {
+        padding-left: 0.5rem;
+      }
+
+
+      #sidenav a {
+        color: #fff;
+        text-decoration:none;
+      }
+
+      #sidenav li.sidebar-parent-container {
+        border-bottom: 0;        
+      }
+
+      #sidenav li.sidebar-parent-container section {
+        background-color:rgba(255, 255, 255, 0.1);
+      }
+
+      #sidenav li.sidebar-parent-container ul {
+        padding-left:0.5rem;
+      }
+
+      li:not(.sidebar-parent-container) {
+        padding-left: 0.5rem;
+      }
+
+      .header-top {
+        display: flex;
+      }
+
+      .sidenav-btn {
+        padding:0.5rem 0 0 0.5rem;
+        /* fix for iOS responsiveness*/
+        z-index: 999;         
+      }
+
+      .sidenav-close {
+        padding:10px 10px 0 0;
+      }
+
+      amp-accordion section h3::after {
+        font-family: 'PT Sans', sans-serif;
+        position: absolute;
+        right: 17px;
+        font-size: 22px;
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+
+
+      amp-accordion section[expanded] h3::after {
+        /*content: '❮';*/
+        content: '⟨';
+
+      }
+      amp-accordion section:not([expanded]) h3::after {
+        /* Unicode: U+276F, UTF-8: E2 9D AF content: '\00276F';*/
+        content: '⟩';
+      }
+
+      .logo {
+        width:100%;
+      }
+
+      .carousel-thumbs {
+        height: 60px;
+        margin: 0;
+        padding: 0.5rem;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      amp-selector [option][selected] {
+        outline:0;
+      }
+
+      .carousel-thumbs amp-img[selected] {
+        box-sizing: border-box;
+        box-shadow: 0 0 2px #f00;
+        border:2px solid red;
+      }
+      #product-carousel .amp-carousel-button {
+        display: none;
+      }
+
+      #product-carousel {
+        max-width: 600px;
+        margin:0 auto;
+      }
+
+/*      .flex-container {
+         max-width: 300px;
+         max-height: 300px;
+      }*/
+
+      amp-image-lightbox {
+        text-align: right;
+        background: rgba(0,0,0,.85);
+      }
+
+      amp-image-lightbox img {object-fit: contain;}
+
+      .btn-close {padding:1rem;cursor: pointer;z-index:9999;}
+
+      amp-img:focus {
+        outline:none;
+      }
+
+      amp-selector {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      }
+      main {
+        padding:0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .product-images, .product-details {
+        flex-basis: 50%;
+        min-width: 16rem;
+        margin: 0 auto;
+        width: 100%;
+        color: #949494;
+        font-family: 'PT Sans', sans-serif;
+      }
+
+      @media (max-width:35rem) {
+        .product-images, .product-details {
+          flex-basis: 100%
+        }
+
+        /* Prevent image from getting too large on small screen */
+        #product-carousel {
+          max-width:260px;
+          margin:0 auto;
+        }
+
+      }
+
+      .product-details ul {padding-left: 1.5rem;padding-bottom:1rem;color:#949494;}
+      .product-details li {padding-left: 0;font-family: 'PT Sans', sans-serif}
+      .product-details h3 {padding-left: 0.5rem;color:#005689;}
+      
+      .product-details p {
+          color: #949494;
+          font-family: 'PT Sans', sans-serif;
+      }
+
+      h2,h3,.product-details p {font-family: 'PT Sans', sans-serif;}
+      .item-price {font-size:2rem;color:#454545;} 
+
+      .content-video {margin: 0.5rem;}
+
+      .btn-video, .btn-add {
+        background-color: #253b48;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 1rem 2px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+      }
+
+      amp-lightbox {
+        background: rgba(0,0,0,0.8);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+      .flex-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+      .flex-row {
+        flex:1;
+        text-align: right;
+      }
+      .btn-close {
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .social {
+        margin: 1rem 0;
+      }
+
+
+      .tab-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      .tab-selector[selected] {
+        outline: none;
+        border:none;
+        border-top: 1px solid #bbb;
+        background: none;
+        box-shadow: none;
+        color: #005689;
+      }
+
+      .tab-selector[selected]:first-child {
+        border-right: 1px solid #394452;
+      }
+
+      .tab-selector[selected]:not(:first-child) {
+        border-left: 1px solid #394452;
+      }     
+    
+      .tab-selector {
+        list-style: none;
+        flex-grow: 1;
+        flex-basis:25%;
+        text-align: center;
+        cursor: pointer;
+        font-size:1.25rem;
+        font-family: 'PT Sans', sans-serif;
+        font-weight:bold;
+        color:#fff;
+        border-bottom: 1px solid #394452;
+        border-top: 2px solid #fff;
+        display: block;
+        padding:0.5rem;
+        background-color: #394452;
+        box-shadow: none;
+      }
+      
+      .tab-content {
+        display: none;
+        width: 100%;
+        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
+        flex-basis: 100%;
+        padding-top:0.5rem;   
+      }
+      
+      .tab-selector[selected]+.tab-content {
+        display: block;
+      }
+
+
+      amp-selector {
+        padding: 0.5rem;
+      }
+
+      amp-selector [option][selected] {
+        outline: 0;
+      }
+
+      .btn-signup {
+        background-color: #253b48;
+        border: 0;
+        color: white;
+        text-transform: uppercase;
+      }
+
+
+      input {
+        font-size: 16px;
+        padding: 0.5em;
+        margin: 0.1em 0.2em;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px solid lightgrey;
+
+      }
+      
+      /* Hack to stop Chrome yellow autofill */
+      input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset;}
+
+      div.loader {margin: 0;}
+
+      /*fix native input styling iOS*/
+      input {
+        -webkit-appearance: none;
+        border-radius:0;
+      } 
+
+      /* Cart styling */
+      .overlay {
+        position: fixed;
+        bottom: 0;
+        left:0;
+        padding:1rem;
+        background-color: rgba(0,0,0,0.85);
+        width: 100%;
+        color:#fff;
+        font-family: 'PT Sans', sans-serif;
+        z-index: 998;
+      }
+
+      .product-name {
+        display: block;
+        font-weight: bold;
+      }
+
+      .form-price {
+        text-align: center;
+      }      
+
+      .amp-form-submit-success .overlay {
+        animation: fadein 1s;
+      }
+
+      .cart-thumb {
+        padding-top:3px;
+      }
+
+      .cart-item-details {
+        display: inline-block;
+      }
+
+      @keyframes fadein {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      #btn-hide::after, #btn-show::after {
+        font-family: 'PT Sans', sans-serif;
+        position: absolute;
+        left:1.6rem;
+        top:0;
+
+        font-size: 28px;
+
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        cursor: pointer;
+        padding: 0 5px;
+      }
+
+
+      #btn-hide::after {
+        content: '⟩';
+      }
+
+      #btn-show::after {
+        content: '⟨';
+      }
+
+      .cart-price {
+        text-align: right;
+        max-width: 100%;
+        margin-right: 2rem;
+        margin-top: -0.5rem;
+        cursor:pointer;
+      }
+
+      .cart-item-price {
+        color: #999;
+      }
+
+    .cart {
+    /*  padding-top: 0.5rem;*/
+      max-height: 120px;
+      overflow-y: scroll;
+    }
+
+    /*fix native input styling iOS*/
+    input {
+      -webkit-appearance: none;
+      border-radius:0;
+    }
+
+    .item-count {
+      position: absolute;
+      left:3.5rem;
+    }
+
+
+    </style>
+  </head>
+  <body>
+
+    <!-- Sidebar navigation with amp-sidebar -->
+    <amp-sidebar id='sidenav' layout='nodisplay' side="left">
+      <svg class="sidenav-close" xmlns="http://www.w3.org/2000/svg" width="21" height="21" on="tap:sidenav.close" role="button" tabindex="0" viewBox="0 0 21.97 21.97">
+        <title>Close sidebar</title>
+        <path fill="none" stroke="#fff" stroke-width="2.5" stroke-miterlimit="10" d="M1.25 20.72L20.72 1.25m-19.47 0l19.47 19.47" stroke-linecap="round"/>
+      </svg>
+
+      <ul>
+        <li class="sidebar-parent-container">
+        <!-- amp-accordion inside amp-sidebar gives expandable menu sections -->
+          <amp-accordion disable-session-states>
+            <section>
+              <h3>women</h3>
+              <ul>
+                <li><a href="#">women</a></li>
+                <li><a href="#">tshirts</a></li>
+                <li><a href="#">knitwear</a></li>
+                <li><a href="#">jeans</a></li>
+                <li><a href="#">swimwear</a></li>
+                <li><a href="#">coats</a></li>
+              </ul>
+            </section>
+            <section>
+              <h3>men</h3>
+              <ul>
+                <li><a href="#">men</a></li>
+                <li><a href="#">tshirts</a></li>
+                <li><a href="#">knitwear</a></li>
+                <li><a href="#">jeans</a></li>
+                <li><a href="#">swimwear</a></li>
+                <li><a href="#">coats</a></li>
+              </ul>
+            </section>              
+          </amp-accordion>   
+        </li>
+       <li><a href="#">kids</a></li>
+       <li><a href="#">brands</a></li>
+       <li><a href="#">deals</a></li>
+       <li><a href="#">accessories</a></li>
+       <li><a href="#">seasonal</a></li>
+       <li><a href="#">bags</a></li>
+       <li><a href="#">jewellery</a></li>
+      </ul>
+    </amp-sidebar>
+
+    <header>
+      <div class="header">
+        <div class="header-top">
+          <!-- SVG hamburger button opens sidenav menu -->
+          <svg class="sidenav-btn" on="tap:sidenav.open" role="button" tabindex="0" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.5 24.5">
+            <g fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2.5px">
+              <line x1="1.25" y1="1.25" x2="29.25" y2="1.25"></line>
+              <line x1="1.25" y1="12.25" x2="29.25" y2="12.25"></line>
+              <line x1="1.25" y1="23.25" x2="29.25" y2="23.25"></line>
+            </g>
+          </svg>
+
+        <div class="logo">theampstore</div>
+        </div>
+        <nav>
+          <!-- horizontal navigation with amp-carousel -->
+          <amp-carousel height="1.8rem"
+          layout="fixed-height"
+          controls
+          type="carousel" class="primary-nav fade">
+
+            <span><a href="#">women</a></span>
+            <span><a href="#">men</a></span>
+            <span><a href="#">kids</a></span>
+            <span><a href="#">brands</a></span>
+            <span><a href="#">deals</a></span>
+            <span><a href="#">accessories</a></span>
+            <span><a href="#">seasonal</a></span>
+            <span><a href="#">bags</a></span>
+            <span><a href="#">jewellery</a></span>       
+
+        </amp-carousel>
+
+        </nav>
+      </div>
+
+
+    </header>
+
+    <h2 class="main-content">T-Shirt: Super Pouvoir</h2>
+    <main>
+    
+      <div class="product-images">
+        <!-- Main product image carousel, slide type carousel -->
+        <amp-carousel id="product-carousel" width="600" height="600" layout="responsive" type="slides" >
+         
+           <amp-img src="img/tshirt-0-f-red-640.png" width="300" height="300" layout="responsive" alt="T-shirt red" on="tap:tshirt-lightbox" role="button" tabindex="0"></amp-img>
+            <amp-img src="img/tshirt-0-f-black-640.png" width="300" height="300" layout="responsive" alt=" T-shirt  black" on="tap:tshirt-lightbox" role="button" tabindex="1"></amp-img>
+            <amp-img src="img/tshirt-0-f-blue-640.png" width="300" height="300" layout="responsive" alt="T-shirt  blue" on="tap:tshirt-lightbox" role="button" tabindex="2"></amp-img>
+            <amp-img src="img/tshirt-0-f-green-640.png" width="300" height="300" layout="responsive" alt="T-shirt green" on="tap:tshirt-lightbox" role="button" tabindex="3"></amp-img>
+                                                       
+        </amp-carousel>
+        <!-- Carousel thumnbails with amp-selector -->
+        <amp-selector class="carousel-thumbs" layout="container">
+          <amp-img on="tap:product-carousel.goToSlide(index=0)" src="img/tshirt-0-f-red-120.png" width="60" height="60" alt="a sample image" option="0" selected role="" tabindex="" ></amp-img>
+
+          <amp-img on="tap:product-carousel.goToSlide(index=1)" src="img/tshirt-0-f-black-120.png" width="60" height="60" alt="a sample image" option="1" role="" tabindex="" ></amp-img>
+
+          <amp-img on="tap:product-carousel.goToSlide(index=2)" src="img/tshirt-0-f-blue-120.png" width="60" height="60" alt="a sample image" option="2" role="" tabindex="" ></amp-img> 
+          <amp-img on="tap:product-carousel.goToSlide(index=3)" src="img/tshirt-0-f-green-120.png" width="60" height="60" alt="a sample image" option="3" role="" tabindex="" ></amp-img>
+
+        </amp-selector>
+
+        <!-- Provides a lightboxed version of selected product image -->
+        <amp-image-lightbox id="tshirt-lightbox" layout="nodisplay">
+         <svg class="btn-close" xmlns="http://www.w3.org/2000/svg" width="21" height="21" on="tap:image-lightbox.close" role="button" tabindex="0" viewBox="0 0 21.97 21.97">
+              <path fill="none" stroke="#fff" stroke-width="2.5" stroke-miterlimit="10" d="M1.25 20.72L20.72 1.25m-19.47 0l19.47 19.47" stroke-linecap="round" />
+            </svg>
+        </amp-image-lightbox>
+      </div>
+
+      <div class="product-details">
+
+        <form method="post" action-xhr="/ch7/add-to-cart.php" target="_top"
+        on="submit:cart_summary.hide">
+          <div class="form-price">
+            incl. VAT <span class="item-price">€9.99</span>
+            <input class="btn-add" type="submit" name="add_to_cart" value="Add to cart">
+          </div>
+          <input type="hidden" name="price" value="9.99">
+          <input type="hidden" name="product_id" value="tshirt-1">
+          <input type="hidden" name="product_name" value="T-Shirt: Super Pouvoir">
+          <input type="hidden" name="product_color" value="red">
+          <input type="hidden" name="image" value="img/tshirt-0-f-red-120.png">
+          <input name="client_id" type="hidden" value="CLIENT_ID(cart)" data-amp-replace="CLIENT_ID">
+          
+
+          <!-- submit-success will be displayed on succesful form submission -->
+          <div submit-success class="overlay" id="add_cart_summary">
+
+            <!-- this template is used by amp-form submit-success AND amp-list cart fetch on page load-->
+            <template type="amp-mustache" id="cart_summary_template">
+              <div class="overlay" id="cart_summary">
+                <div class="cart-price" 
+                     role="button" tabindex="" 
+                     on="tap:cart.toggleVisibility,btn-hide.toggleVisibility,btn-show.toggleVisibility">
+                  <span id="btn-hide" ></span>
+                  <span id="btn-show" hidden></span>
+                  <span class="item-count">{{cart_total_items}} items</span>   
+                  Sub-total: €{{cart_total_price}}
+                </div>
+                <div id="cart" class="cart">
+                  {{#cart_items}}
+                    <div class="product">
+                      <span class="cart-thumb">
+                        <amp-img src="{{image}}" width="36" height="36" layout="fixed"></amp-img>
+                      </span>
+                      <div class="cart-item-details">
+                        <span class="product-name">{{product_name}}</span>
+                        <div class="cart-item-price">
+                          {{quantity}} &times; €{{price}}
+                        </div>
+                      </div>
+                    </div>
+                  {{/cart_items}}  
+                </div>
+              </div>
+            </template> 
+
+          </div>
+        </form>      
+
+        <!-- Cart contents via amp-list on page load -->
+        <amp-list src="/ch7/cart.php?client_id=CLIENT_ID(cart)"
+            credentials="include"
+            height="1" width="auto" layout="fixed-height"
+            template="cart_summary_template"
+            items="cart">
+        </amp-list>
+       
+
+        <!-- Product tabs with amp-selector -->
+        <amp-selector role="tablist" layout="container" class="tab-container">
+          <div role="tab" class="tab-selector" selected option="1">
+            Description
+          </div>
+          <div role="tabpanel" class="tab-content">  
+
+            <ul>      
+              <li>Inspired cool French running T-Shirt</li>
+              <li>100% Cotton</li>
+              <li>ADULT chest sizes S (38"), M (40"), L (42"), XL (44"), XX-Large (46")</li>
+              <li>Cotton design with front large screen printed design on the side - trendy cool retro design</li>
+              <li>100% soft cotton short sleeve Purple tee with front motif</li>
+              <li>Comes in adult sizes makes it ideal for a gift, great casual wear and funny design. </li>
+              <li>Only worn once</li>
+            </ul>
+
+            <button class="btn-video" on="tap:vid-lightbox">LAUNCH VIDEO</button>
+
+          </div>
+
+          <div role="tab" class="tab-selector" option="2">
+            Delivery
+          </div>
+          <div role="tabpanel" class="tab-content">
+          <p>All orders over €10 are sent by DPD couriers. Orders are sent on a next working day service. Delivery costs are worked out by weight. Price start at €5.99. Orders over €200 excluding VAT are free to the UK mainland.</p>
+
+           <p>Cut off time for next working day delivery is 4PM. If you place your order after 4PM your order will be processed and dispatched the next working day. If you place your order after 4PM on Thursday your order will be dispatched on Friday for delivery on Monday. We do not deliver on Saturday. We dispatch next day delivery items over weekend , our cut off time for Monday delivery is 12PM Sunday. Please note customer service is not open weekends and it is not possible to amend any orders placed over weekend.  If your order contains non next day delivery placed after 4PM on Friday it will be processed on Monday for delivery on Tuesday.</p>
+
+          <p>Orders placed under €12 may be sent by An Post for €3.95 this option is not trackable and does not guarantee next day delivery.</p>
+
+          <p>All deliveries should be checked immediately.</p>
+          </div>
+        </amp-selector>
+
+
+        <!-- Social sharing with amp-social -->
+        <div class="social">
+          <amp-social-share type="email" width="32" height="32"></amp-social-share>
+          <amp-social-share type="facebook" data-param-app_id="123456789101112" width="32" height="32"></amp-social-share>
+          <amp-social-share type="twitter" width="32" height="32"></amp-social-share>
+          <amp-social-share type="linkedin" width="32" height="32"></amp-social-share>
+          <amp-social-share type="pinterest" width="32" height="32"></amp-social-share>
+          <amp-social-share type="tumblr" width="32" height="32"></amp-social-share>
+          <amp-social-share type="gplus" width="32" height="32"></amp-social-share>
+          <amp-social-share type="whatsapp" width="32" height="32" ></amp-social-share>
+        </div>
+      </div>
+
+      <!-- video lightbox with amp-lightbox and amp-youtube -->
+      <amp-lightbox id="vid-lightbox" layout="nodisplay">
+        <div class="flex-container">
+          <div class="flex-row">
+            <svg class="btn-close" xmlns="http://www.w3.org/2000/svg" width="21" height="21" on="tap:vid-lightbox.close" role="button" tabindex="0" viewBox="0 0 21.97 21.97">
+              <path fill="none" stroke="#fff" stroke-width="2.5" stroke-miterlimit="10" d="M1.25 20.72L20.72 1.25m-19.47 0l19.47 19.47" stroke-linecap="round" />
+            </svg>
+            <amp-youtube  width="853" height="480" layout="responsive" data-videoid="AR5N2bXv0V8"></amp-youtube>
+          </div>
+        </div>
+      </amp-lightbox>
+
+    </main>
+
+
+    <footer>
+      <div class="main-content">privacy policy | <a href="image-credits.html">image credits</a></div>
+    </footer>
+  </body>
+</html>

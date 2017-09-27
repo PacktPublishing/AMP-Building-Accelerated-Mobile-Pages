@@ -1,0 +1,114 @@
+html, body, p, td, span, h1, h2, h3, ul, li {
+  font-family: Helvetica,Arial,"Lucida Grande",sans-serif;
+  font-size: 14px;
+  color: #111;
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+}
+
+body {
+  border: 7px solid #b6dcfd;
+  margin: 0px;
+}
+
+h1 {
+  font-size: 18px;
+  padding: 10px;
+  background-color: #e8e8e8;
+}
+
+h2 {
+  font-size: 16px;
+  padding: 7px 10px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: normal;
+  padding: 2px 40px;
+}
+
+p {
+  padding: 2px 70px;
+}
+
+#api {
+  background-color: #f4f4f4;
+  border-bottom: 7px solid #b6dcfd;
+}
+
+ul {
+  padding: 10px 50px;
+  list-style-type: none;
+}
+
+ul li {
+  clear: both;
+  height: 25px;
+}
+
+ul label {
+  color: #555;
+  width: 150px;
+  float: left;
+}
+
+ul span {
+  float: left;
+}
+
+#results {
+  padding: 10px;
+}
+
+p {
+  color: green;
+}
+
+#ua-comment {
+  color: red;
+  font-size: 12px;
+}
+
+table {
+  margin-left: 30px;
+}
+
+td {
+  padding: 2px 5px;
+}
+
+td.prop-name {
+  color: #555;
+  text-align: right;
+}
+
+td.type {
+  color: #aaa;
+}
+
+#error {
+  color: red;
+}
+
+#servers {
+  border-top: 7px solid #b6dcfd;
+  padding: 10px;
+}
+
+#servers p {
+  padding-bottom: 4px;
+  padding-left: 40px;
+  color: #888;
+  font-size: 12px;
+}
+
+#servers div {
+  padding-left: 20px;
+}
+
+code {
+  color: #006FFF;
+  font-size: 12px;
+}

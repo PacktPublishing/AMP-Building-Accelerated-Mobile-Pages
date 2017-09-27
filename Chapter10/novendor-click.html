@@ -1,0 +1,63 @@
+<!-- Custom analytics vendor click tracking -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch10/novendor-click.html" />
+    <title>The AMP Book</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <style amp-custom>
+      body {
+        font-family: Arial;
+        width:100%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0.5rem;
+      }    
+    </style> 
+
+  </head>
+  <body>
+    <amp-analytics>
+      <script type="application/json">
+        {
+          "requests": {
+            "pageview": "https://a.theampbook.com?url=${canonicalUrl}&title=${title}&acct=${account}",
+            "event": "https://a.theampbook.com?url=${canonicalUrl}&title=${title}&acct=${account}&buttonId=${buttonId}"
+          },
+          "vars": {
+            "account": "UA-XXXXX-Y"
+          },
+          "triggers": {
+            "trackPageview": {
+              "on": "visible",
+              "request": "pageview"
+            },
+            "buttonClickTracker": {
+              "on": "click",
+              "selector": "button",
+              "request": "event"
+            }
+          }
+
+        }
+      </script>
+    </amp-analytics>  
+      <h1>amp-analytics click</h1>
+      <button on="tap:msg.show" data-vars-button-id="Click me button">Click me!</button><br />
+      
+      <div id="msg" hidden>
+        <p>An analytics event request was sent! Check the browser dev tools to see the request.</p>
+        <p>Since we have data-vars-button-id="Click me button" in the button markup, and ${buttonId} in the event request URL, the value "Click me button" will be automatically submitted with the analytics request.</p>
+      </div> 
+
+  </body>
+</html>

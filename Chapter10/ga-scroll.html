@@ -1,0 +1,99 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch10/ga-scroll.html" />
+    <title>The AMP Book | amp-analytics scroll tracking</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-custom>
+      body {
+        font-family: Arial;
+        width:100%;
+        text-align: center;
+      }
+      .main {
+        width: 30%;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.5rem;
+        padding: 1rem 0.5rem;
+        margin:0;
+      }           
+      .h25pc {
+        position: relative;
+        height:1000px;
+        width:100%;
+        color: #fff;
+        font-weight: bold;
+        font-size: 4rem;
+        background-color: rgba(0,0,0,0.25);
+      }
+      .content {
+        position: absolute;
+        bottom: 0;
+        padding-left: 0.75rem;
+      } 
+
+      .h50pc {background-color: rgba(0,0,0,0.5);}
+
+      .h75pc {background-color: rgba(0,0,0,0.75);}
+
+      .h100pc {background-color: rgba(0,0,0,1);}
+
+    </style>
+  </head>
+  <body>
+    <amp-analytics type="googleanalytics">
+    <script type="application/json">
+    {
+      "vars": {
+        "account": "UA-103053267-1"
+      },
+      "triggers": {
+        "scrollTracking": {
+          "on": "scroll",
+          "scrollSpec": {
+            "verticalBoundaries": [25, 50, 75, 100]
+          },
+          "request": "event",
+          "vars": {
+            "eventCategory": "Scroll completion",
+            "eventAction": "Scrolled ${verticalScrollBoundary}%",
+            "eventLabel": "${ampdocUrl}"
+          }
+        }
+      }
+    }
+    </script>
+    </amp-analytics>
+    <div class="main">
+      <div class="h25pc">
+        <h1>amp-analytics scroll tracking</h1>
+        <div class="content">
+        25%
+        </div>
+      </div>
+      <div class="h25pc h50pc">
+        <div class="content">
+        50%
+        </div>
+      </div>
+      <div class="h25pc h75pc">
+        <div class="content">
+        75%
+        </div>
+      </div>
+      <div class="h25pc h100pc">
+        <div class="content">
+        100%
+        </div>
+      </div>    
+    </div>
+
+  </body>
+</html>

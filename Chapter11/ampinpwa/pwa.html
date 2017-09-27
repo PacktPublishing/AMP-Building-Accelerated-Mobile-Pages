@@ -1,0 +1,193 @@
+<html lang="en">
+<head>
+<title>The AMP Book | AMP in PWA</title>
+<script async src="https://cdn.ampproject.org/shadow-v0.js"></script>
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<style>
+      html, body, ul {
+        margin:0;
+        padding:0;
+        font-family: 'Droid Serif', serif;
+      }
+      .header, .main-content, article, main {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      header {
+        background-color: #005689;
+        padding:0.5rem;
+      }
+
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      .logo::before {
+        content: 'PWA HEADER';
+        left: 0;
+        position: absolute;
+        float: left;
+        color: #024779;
+        font-family: 'PT Sans';
+        opacity: 0.4;
+        background: #fff;
+        font-size: 1.5rem;
+        top: 0;
+      }
+
+      .primary-nav li, .primary-nav span, .primary-nav a {
+        font-family: 'PT Sans', sans-serif;
+        color:#fff;
+        font-size: 1.5rem;
+      }
+
+      .primary-nav a {
+        text-decoration:none;
+      } 
+
+      nav {
+        overflow-x:scroll;
+        white-space: nowrap;
+      }
+
+      header a{
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        padding-right: 10px;
+        text-decoration: none;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+      footer {
+        color: #dcdcdc;
+        background: #484848;
+        padding:0.5rem;
+      }      
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header">
+    <div class="logo">theampbook</div>
+    <nav>
+      <div><span class=""><a href="#">news</a></span><span class=""><a href="#">sports</a></span><span class=""><a href="#">arts</a></span><span class=""><a href="#">tech</a></span><span class=""><a href="#">education</a></span><span class=""><a href="#">health</a></span><span class=""><a href="#">entertainment</a></span><span class=""><a href="#">living</a></span><span class=""><a href="#">politics</a></span></div>
+
+    </nav>
+  </div>
+</header>
+
+<!-- AMP doc will be loaded into this container  -->
+<div id="container">
+
+</div>
+
+<footer id="footer">
+  This is the PWA shell footer!
+</footer>
+
+
+<script type="application/javascript">
+
+// This can be any DOM element
+var container = document.getElementById('container');
+
+// The AMP page you want to display
+var startUrl = "https://theampbook.com/ch11/ampinpwa/amp-0.html";
+
+// When Shadow AMP is ready load in the AMP doc 
+(window.AMP = window.AMP || []).push(function(AMP) {
+  // AMP can be used now.
+  showAMPContent();
+});
+
+function showAMPContent(url) {
+  var updateHistory = true;
+  if(null==url) {
+    url = startUrl;
+    updateHistory = false;
+  }
+  fetchDocument(url).then(function(doc) {
+    // Filter the content, remove anything we don't want
+    // e.g. if PWA has its own header you could remove AMP header & footer like this
+    var header = doc.querySelector("header");
+    if(null!=header) header.remove();
+
+    var footer = doc.querySelector("footer");
+    if(null!=footer) footer.remove();
+
+    var newDocContainer = document.createElement('div');
+
+    // Let Shadow AMP render the doc 
+    var ampedDoc = AMP.attachShadowDoc(newDocContainer, doc, url);
+
+    // Remove old AMP doc if there is one
+    var ampContainer = document.getElementById('ampContainer');
+    if(ampContainer) container.removeChild(ampContainer);
+
+    newDocContainer.setAttribute('id','ampContainer');
+    container.appendChild(newDocContainer);
+
+    // Update history
+    if(updateHistory && history.state.url != url) history.pushState({url:url}, null, url);
+
+    // Search attached AMP doc for links to hijack
+    newDocContainer.shadowRoot.querySelectorAll("a.amp-link").forEach(function(el) {
+     // Should check that it's an AMP link e.g. include class="amp-link" on AMP links
+      el.addEventListener("click", function(e){
+        ampedDoc.close();
+        ampedDoc = null;
+        container.textContent='';
+        e.preventDefault();
+        showAMPContent(el.getAttribute('href'));
+      }, false);
+    });
+
+  });
+}
+
+function fetchDocument(url) {
+  var xhr = new XMLHttpRequest();
+
+  return new Promise(function(resolve, reject) {
+    xhr.open('GET', url, true);
+    xhr.responseType = 'document';
+    xhr.setRequestHeader('Accept', 'text/html');
+    xhr.onload = function() {
+      // .responseXML contains a ready-to-use Document object
+      resolve(xhr.responseXML);
+    };
+    xhr.send();
+  });
+}
+
+window.onpopstate = function (event) {
+    showAMPContent(event.state.url);
+};
+
+
+if("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").then(function(reg){
+    console.log('ServiceWorker scope: ', reg.scope);
+  }).catch(function(err) {
+    console.log('ServiceWorker registration failed: ', err);
+  });
+};
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!-- Open in web browser for formatted version --> <!DOCTYPE html><html><title>DeviceAtlas Cloud Client API</title><xmp theme="da">
+
+# DeviceAtlas Cloud Client API #
+
+DeviceAtlas Cloud is a web service that can return device information such
+as screen width, screen height, is mobile, vendor, model etc. To see a full
+list of properties, please visit
+https://deviceatlas.com/resources/available-properties .
+
+This Client API provides an easy way to query DeviceAtlas Cloud. It provides the
+ability to cache returned data locally to greatly improve performance and has
+automatic failover should one of the global DeviceAtlas Cloud endpoints become
+unavailable. As of version 1.2, the Client API is able to leverage data
+collected by the DeviceAtlas Client Side Component. This data is sent to
+DeviceAtlas Cloud to augment the data found from the normal HTTP headers and
+also allows the detection of the various iPhone and iPad models.
+
+
+
+### Dependencies ###
+This library does not depend on any third party libraries.
+
+
+
+### Configuration ###
+
+The DeviceAtlas Cloud Client API is configured by setting the constants/properties
+at the top of the "Client.php" file.
+The only required constant is your DeviceAtlas licence key.
+
+Note: as of version 1.4 the API throws exceptions on errors and failures unless
+the class constant "DEBUG_MODE" at the top of the "Client.php" file is set to
+false. It is recommended to keep "DEBUG_MODE" set to true during implementation
+time.
+
+
+#### Basic Usage ####
+The DeviceAtlas Cloud Client API can be used as follows:
+
+* Edit the "Client.php" and set your licence key to the class constant as shown
+  below, at this point you can change the default API configurations.
+    ```php
+    const LICENCE_KEY = 'ENTER-YOUR-LICENCE-KEY';
+    ```
+
+* Include the DeviceAtlas Cloud Client API to your application.
+    ```php
+    require_once '/path/to/Api/Client.php';
+    ```
+
+* Get the properties.
+    ```php
+    try {
+        // use the headers from request ($_SERVER) for detection:
+        $result = DeviceAtlasCloudClient::getDeviceData();
+
+        // get the properties
+        if (isset($result[Client::KEY_PROPERTIES])) {
+            $properties = $result[Client::KEY_PROPERTIES];
+        }
+    } catch (Exception $ex) {
+
+        // handle the errors
+    }
+    ```
+
+* To manually pass the user-agent for detection
+    ```php
+    $result = DeviceAtlasCloudClient::getDeviceData($userAgent);
+    ```
+
+* To manually pass a set of HTTP headers
+    ```php
+    $result = DeviceAtlasCloudClient::getDeviceData($headers);
+    ```
+
+* Use the device properties:
+    ```php
+    if (isset($properties["mobileDevice"]) && $properties["mobileDevice"]) {
+
+        // example 1: Get the screen width for image optimization
+        $displayWidth = isset($properties["displayWidth"])?
+            $properties["displayWidth"]: 100;
+
+        // example 2: Get the device vendor name
+        $vendor = isset($properties["vendor"])?
+            $properties["vendor"]: "";
+
+        // example 3: Touch screen optimization
+        $useBiggerIcons = isset($properties["touchScreen"])?
+            $properties["touchScreen"]: false;
+
+        // example 4: Send Geo Location JS to client?
+        $supportsGeoLocation = isset($properties["js.geoLocation"])?
+            $properties["js.geoLocation"]: false;
+    }
+    ```
+
+    See the list of all property names here:
+    https://deviceatlas.com/resources/available-properties
+    The availability of a property depends on the device and your licence,
+    before accessing a property always check if it exists in the set or not.
+
+
+* When DEBUG_MODE = false or API versions < 1.4
+    ```php
+    // use the headers from request ($_SERVER) for detection:
+    $result = DeviceAtlasCloudClient::getDeviceData();
+
+    // handle the errors
+    if (isset($result[Client::KEY_ERROR]) && $result[Client::KEY_ERROR]) {
+        // $result[Client::KEY_ERROR] contains the error messages
+    }
+
+    // get the properties
+    if (isset($result[Client::KEY_PROPERTIES])) {
+        $properties = $result[Client::KEY_PROPERTIES];
+    }
+    ```
+
+
+### Examples ###
+Various examples are included in this package to clearly demonstrate the API
+features, usage and some use cases. These examples are very simple and are
+heavily commented.
+
+#### Basic Usage ####
+Includes two examples. One simple command line example which uses the API to
+detect and get properties from header sets. The other example is a web application.
+This example uses the API for the current request to automatically detect and get
+the properties. Using custom API configs and the client-side-component is shown
+in this example.
+
+#### Redirection ####
+This web example uses the API to get properties for the current request and then
+uses some basic property values to decide which website provides the most suitable
+content for the device making the request.
+
+#### Content Adaptation ####
+This web example uses the API to get properties for the device making the current
+request and then uses some basic property values to choose a suitable template to
+wrap around the content.
+
+#### Analytics ####
+This web example uses the API to get properties for user-agents from a given list.
+Some properties such as vendor, browser name and device type are aggregated and
+the results are displayed as graphs and numbers.
+
+#### Content Targeting ####
+This example uses the API to detect the device and use some of its properties to
+show certain advertisements and download links which may be related or of interest
+to the user, considering his/her device.
+
+Note that in the web examples which use the API, the client side properties are
+taken into account automatically by the API if the cookie exists on the browser.
+This means if the cookie already exists within your browser you will still see
+the client side properties in the result even when the DeviceAtlas client side
+component is not added to the page. You can delete the cookie manually to see the
+differences between the results from examples which use the client side component
+and those that don't.
+
+
+
+
+### Caching ###
+
+The API can cache the returned data after a call to the DeviceAtlas Cloud service,
+this will speed up subsequent requests.
+
+The API has a file caching mechanism. It is recommended to always use the file
+cache if possible.
+
+The file cache stores the returned properties on your server disk. The cache
+location is typically the system temp directory but this can be overridden with
+the "CUSTOM_CACHE_DIR" constant. Items in the cache expire after a set time
+period to ensure the data is up-to-date. This cache is enabled by default. It is
+recommended to always have file caching enabled even when you are using cookie
+cache.
+
+Items in the cache expire after a set time period to ensure the data is up-to-date.
+
+
+
+
+### Client Side Component ###
+In addition to the properties from the user-agent detection, properties can be
+gathered from the client's browser and used both on the client side and on the
+server side. Please see the [ClientSide readme file](README.ClientSide.html) for
+more information.
+
+
+
+
+#### Usage with Client Side Component ####
+In addition to normal usage, DeviceAtlas has the capability to capture client
+side properties and merge them into the server side properties.
+
+The "deviceatlas.min.js" file must be included on your webpage in order for it
+to detect the client side properties. The contents of this cookie are
+automatically detected with the request headers. Both sets of properties are
+used in additional logic to determine other properties such iPhone and iPad
+models which are normally not detectable.
+
+By default, if the cookie exists it will be used by the API. To disable using
+the client side cookie:
+```php
+USE_CLIENT_COOKIE = false;
+```
+
+
+
+### DeviceAtlas Cloud Service End-points ###
+
+The DeviceAtlas Cloud Service is powered by independent clusters of servers
+spread around the world. This ensures optimum speed and reliability. The API is
+able to automatically switch to a different end-point if the current end-point
+becomes unavailable. It can also (optionally) auto-rank all of the service
+end-points to choose the end-point with the lowest latency for your location.
+
+The Cloud service end-points are defined in the $SERVERS variable at the top of
+the "Client.php" file.
+```php
+$SERVERS = array(
+    array('host' => 'server1-url', 'port' => server1-port),
+    array('host' => 'server2-url', 'port' => server2-port),
+    array('host' => 'server3-url', 'port' => server3-port),
+);
+```
+
+By default the API will analyze the end-points from time to time to rank them by
+their stability and response speed. The ranked list is then cached and used
+whenever the Client API needs to query the DeviceAtlas Cloud Service. If an end-
+point fails, the Client API will automatically switch to the next end-point on
+the list.
+
+There is no need to set the servers array if auto-ranking is turned on. If you
+wish, you may re-order the array and turn auto-ranking off. In this case the API
+will respect your preferred order of end-points and only switch to a different
+end-point should the primary one fail to resolve.
+
+
+#### Notes ####
+
+* With the default auto-ranking settings, the ranking is done every 24 hours.
+   The actual time may be more than 24 hours as the ranking is only triggered by
+   a request to the Client API and the cached server list is older than value
+   set to AUTO_SERVER_RANKING_LIFETIME.
+
+* During end-point analysis a number of requests are made to each end-point.
+   Please note that these requests count towards your total hits to
+   the Cloud service.
+
+   e.g:
+    ```php
+      if
+          Server list contains 3 servers
+          AUTO SERVER RANKING LIFETIME = 1440
+          AUTO SERVER RANKING NUM REQUESTS = 3
+      then
+          auto ranking will add 9 (3x3) hits per day
+    ```
+
+#### Methods ####
+
+* Get the ranked server list:
+```php
+    $rankedServerList = DeviceAtlasCloudClient::getServers();
+```
+
+The first end-point in the list will be used to make a request to the cloud, if
+it fails the next end-point will be take it's place.
+
+* Get the end-point used for the last request:
+```php
+    $server = DeviceAtlasCloudClient::getCloudUrl();
+```
+Note that if the data comes from cache this method will return "null".
+
+* Get end-point info. This is useful when you want to manually rank the server list:
+```php
+    $server = DeviceAtlasCloudClient::getServersLatencies();
+```
+
+
+Please see https://deviceatlas.com/resources/cloud-service-end-points for more
+information.
+
+#### Cloud Server end-point settings ####
+
+##### AUTO_SERVER_RANKING = true #####
+
+To turn auto ranking on/off. To manually rank the servers set to "false"
+and edit the $SERVERS array to set your preferred order of end-points.
+The API will not rank the servers and will use the $SERVERS list items
+directly with the topmost server used first to get device data. On fail-
+over the next end-point in the list will be used.
+
+##### CLOUD_SERVICE_TIMEOUT = 2 #####
+
+Time in seconds. If an end-point fails to respond in this amount of time
+the API will fail-over to the next end-point on the list.
+
+##### AUTO_SERVER_RANKING_MAX_FAILURE = 1 #####
+
+When auto ranking servers, if a server fails more than this number of
+times it will not be included in the list.
+
+##### AUTO_SERVER_RANKING_NUM_REQUESTS = 3 #####
+
+When auto ranking servers, number of requests to perform for service
+speed calculation.
+
+##### AUTO_SERVER_RANKING_LIFETIME = 1440 #####
+
+Time in minutes. How often to auto rank servers.
+0 = servers will be ranked and cached only once and this list will not be
+updated automatically. You can update this list manually:
+DeviceAtlasCloudClient::rankServers();
+Note: AUTO_SERVER_RANKING must be set "true" so this cached server list
+will be used by the API, even if AUTO_SERVER_RANKING_LIFETIME is set to 0.
+If AUTO_SERVER_RANKING = false then the cached server list will be
+totally ignored.
+
+##### SERVER_PHASEOUT_LIFETIME = 1440 #####
+
+Used when auto ranking is OFF. Specifies how long to use the fail-over
+endpoints before the preferred end-point is re-checked. If the preferred
+end-point is available it will be added back into the list of end-points
+and used for future requests.
+
+
+
+
+### Extra Tools ###
+
+This package comes with extra tools that can help you enhance your mobile websites.
+
+#### DeviceAtlas Client Side Component ####
+This is the DeviceAtlas Client Side component which discovers device info on
+client side to augment the server data.
+This library is used in the DeviceAtlas Cloud Client API examples.
+
+#### Latency Checker ####
+There are two command line tools included in this package to help you tweak the
+DeviceAtlas Cloud API end-point selecting.
+
+##### Check Server Latency #####
+This tool can be used to get info about the DeviceAtlas Cloud Service end-points.
+The info shown can be used for manually setting up the DeviceAtlas Clous service
+end-points in the API. To access the cloud servers a valid DeviceAtlas licence
+would be required.
+
+Usage (command line):
+```php
+    php /path/to/ExtraTools/LatencyChecker/CheckServerLatency.php
+```
+
+##### Update Server Ranking Cache #####
+When AUTO_RANKING is set ON you can use this tool to re rank the DeviceAtlas Cloud
+end-points. All you need to do is to run this script in regular intervals which
+are smaller than the "AUTO_SERVER_RANKING_LIFETIME".
+
+Usage (command line):
+```php
+    php /path/to/ExtraTools/LatencyChecker/UpdateServerRankingCache.php
+```
+
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+_ Copyright (c) Afilias Technologies Limited 2017. All Rights Reserved. _
+
+
+<!-- HTML+JS for document formatting when opened in browser --> 
+<div class="btn-group" id="main-menu" style="float:right"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="README.html">Main</a></li><li class="disabled"><a href="README.CloudApi.html">Cloud Client API</a></li><li><a href="README.ClientSide.html">Client-side Component</a></li><li class="divider"></li><li><a href="ApiDocs/index.html">DeviceAtlas Cloud Client API docs</a></li></ul></div></xmp><script src="https://deviceatlas.com/sites/all/libraries/strapdown/strapdown.js"></script></html>

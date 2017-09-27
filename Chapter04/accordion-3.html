@@ -1,0 +1,459 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch4/accordion-3.html" />
+    <title>The AMP Book News Daily</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|PT+Sans" rel="stylesheet"> 
+
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+
+    <style amp-custom>
+      html, body, ul {
+        margin:0;
+        padding:0;
+        font-family: 'Droid Serif', serif;
+      }
+      header {
+        background-color: #005689;
+        padding:0.5rem;
+      }
+
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      .primary-nav li, .primary-nav span, .primary-nav a {
+        font-family: 'PT Sans', sans-serif;
+        color:#fff;
+        font-size: 1.5rem;
+      }
+
+      .primary-nav a {
+        text-decoration:none;
+      }    
+
+      header li {
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        padding-right: 10px;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      h2 {
+        color: #005689;
+        margin: 0;
+        /*border-bottom: 1px solid #ddd;*/
+        margin:5px;
+      }
+
+      img.feature-img {
+        width: 100%;
+      }
+      p {
+        padding:0.5rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        color: #dcdcdc;
+        background: #484848;
+        padding:0.5rem;
+      }
+
+      figure {
+        margin:5px;
+      }
+
+      figcaption {
+        font-family: Georgia;
+        font-weight: bold;
+      }
+
+      .related-thumb{
+        display:flex;
+        align-items: center;
+        flex-wrap:nowrap;
+      }
+
+      .related-thumb amp-img {
+        min-width: 125px;
+        margin: 0;
+      }
+
+
+      .author {
+        color: #bbb;
+        display:block;
+      }
+
+      @media (min-width:50.01rem){
+        figure {
+          margin:20px 40px;
+        }  
+
+        .related-thumb {
+          flex-basis:25%;
+          flex-wrap:wrap;
+        }
+
+        .related-thumb amp-img,.related-thumb figcaption
+        {-ms-flex-preferred-size:100%;flex-basis:100%}
+
+         .related-items li {
+          width:25%;
+        } 
+      }
+
+      @media (min-width:35rem) and (max-width:50rem){
+        figure {
+          margin:20px 40px;
+        }  
+
+        .related-thumb {
+          flex-basis:25%;
+          flex-wrap:wrap;
+        }
+
+        .related-thumb amp-img,.related-thumb figcaption
+        {-ms-flex-preferred-size:100%;flex-basis:100%}
+
+         .related-items li {
+          width:50%;
+        } 
+      }
+
+
+      .related-thumb amp-img {
+        margin-right:5px;
+      }
+
+      .related-items {
+        display:flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0.5rem 0 1rem 0;
+      }
+
+
+      /* ACCORDION */
+      amp-accordion {
+        padding: 0.5rem;
+      }
+
+      .category-title {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 1.5rem; 
+        color: #005689;
+        background: none;
+        border:0;
+        border-top: 1px solid #ddd;
+        padding:0.25rem;
+      }
+
+      .category-title::after {
+        position: absolute;
+        right: 0.5rem;
+        color: #005689;
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+
+      amp-accordion section[expanded] h3::after {
+        content: '⟨';
+
+      }
+      amp-accordion section:not([expanded]) h3::after {
+        /* Unicode: U+276F, UTF-8: E2 9D AF content: '\00276F';*/
+        content: '⟩';
+      }
+
+      .image-credit, .image-credit a {
+        color:#666;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">theampbook</div>
+      <nav>
+        <ul class="primary-nav">
+          <li>news</li>
+          <li>sports</li>
+          <li>arts</li>
+        </ul>
+      </nav>
+    </header>
+    <article>
+      <h1>Breaking: AMP is fast</h1>
+      <amp-img src = "img/feature.jpg"  
+            srcset = "img/feature-1200.jpg 1200w,
+                      img/feature-lrg.jpg 1080w,
+                      img/feature-med.jpg 768w,
+                      img/feature.jpg 320w"
+             width = "768"
+            height = "305"
+            layout = "responsive" >
+            <amp-img placeholder
+                     src="img/feature-tiny.jpg"
+                     width="768"
+                     height="305"  
+                     layout="responsive">
+            </amp-img>
+      </amp-img>
+
+
+
+
+      <p class="drop-caps">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis at ligula sit amet pellentesque. Proin cursus malesuada aliquet. Aenean volutpat ultricies ipsum, in condimentum risus sagittis vitae. Suspendisse quam mauris, molestie sed consectetur sed, pretium in tortor.</p>
+
+
+      <p>Donec sollicitudin risus ac odio commodo vestibulum. Cras semper convallis turpis, ut pharetra quam ultricies quis. Vivamus sagittis diam tellus. Quisque efficitur ante et nunc elementum sagittis.</p>
+
+
+      <amp-accordion>
+        <section>
+          <h3 class="category-title">news</h3>
+          <div>
+            <ul class="related-items">
+              <li>
+               <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/penguin.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/penguin-sm.jpg 125w,
+                                    img/penguin.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/penguin-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption>
+                    World peace accord agreed 
+                    <span class="author">Joan Baez</span>
+                  </figcaption>
+                </figure>
+              </li>
+
+              <li>
+                <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/cat.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/cat-sm.jpg 125w,
+                                    img/cat.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/cat-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption>
+                    New study: catz smrter than humanz
+                    <span class="author">Mike Hat</span>            
+                  </figcaption>
+                </figure>
+              </li>
+
+              <li>
+               <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/swan.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/swan-sm.jpg 125w,
+                                    img/swan.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/swan-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption>
+                    Lost city of Atlantis found in Pacific Ocean
+                    <span class="author">Steve Zissou</span>
+                  </figcaption>
+                </figure>
+              </li>
+
+              <li>
+                <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/dog.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/dog-sm.jpg 125w,
+                                    img/dog.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/dog-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption class="" >
+                    Life on Mars confirmed
+                    <span class="author">David Bowie</span>
+                  </figcaption>
+                </figure>
+              </li>      
+
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h3 class="category-title">sports</h3>
+          <div>
+            <ul class="related-items">
+              <li>
+               <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/penguin.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/penguin-sm.jpg 125w,
+                                    img/penguin.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/penguin-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption>
+                    World peace accord agreed 
+                    <span class="author">Joan Baez</span>
+                  </figcaption>
+                </figure>
+              </li>
+
+              <li>
+                <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/cat.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/cat-sm.jpg 125w,
+                                    img/cat.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/cat-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption>
+                    New study: catz smrter than humanz
+                    <span class="author">Mike Hat</span>            
+                  </figcaption>
+                </figure>
+              </li>
+
+              <li>
+               <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/swan.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/swan-sm.jpg 125w,
+                                    img/swan.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/swan-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption>
+                    Lost city of Atlantis found in Pacific Ocean
+                    <span class="author">Steve Zissou</span>
+                  </figcaption>
+                </figure>
+              </li>
+
+              <li>
+                <figure class="related-thumb">
+                  <amp-img media = "(min-width: 35.01rem)"
+                             src = "img/dog.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive" 
+                          srcset = "img/dog-sm.jpg 125w,
+                                    img/dog.jpg 640w">            
+                  </amp-img>
+                  <amp-img media = "(max-width: 35rem)"
+                             src = "img/dog-crop.jpg" 
+                           width = "125" 
+                          height = "75" 
+                          layout = "responsive">
+                  </amp-img>
+                  <figcaption class="" >
+                    Life on Mars confirmed
+                    <span class="author">David Bowie</span>
+                  </figcaption>
+                </figure>
+              </li>      
+
+            </ul>
+          </div>          
+        </section>
+        
+        <section>
+          <h3 class="category-title">arts</h3>
+          <amp-img src="img/penguin.jpg" layout="fixed" width=125 height=75></amp-img>
+        </section>
+      </amp-accordion>
+
+      <br />
+      <small class="image-credit">
+        <em>Image credits:
+          <a href="
+  https://www.flickr.com/photos/cmichel67/17588862165/">Christopher Michel</a>,        
+          <a href="
+  https://www.flickr.com/photos/mamchenkov/276090867/">Leonid Mamchenkov</a>, 
+          <a href="
+  https://www.flickr.com/photos/149424226@N07/33934835375/">Jan Moltzen</a>,
+          <a href="https://www.flickr.com/photos/126376801@N02/14679953976/">Pie Pec</a>
+        </em>
+      </small>
+
+    </article>
+
+    <footer id="footer">
+      privacy policy
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,281 @@
+<!-- Open in web browser for formatted version --> <!DOCTYPE html><html><title>DeviceAtlas Client-side Component</title><xmp theme="da">
+
+# DeviceAtlas Client-side Component #
+
+DeviceAtlas provides an optional client-side JavaScript library for gathering
+additional properties using Javascript. This library can send the gathered
+properties back to the DeviceAtlas API running on a web server. The JavaScript
+properties are then used to augment the regular DeviceAtlas properties and allow
+for additional capabilities like fine-grained Apple device detection.
+
+The client properties are also available to other JavaScript libraries. The
+DeviceAtlas client detection file needs to be included on your web page for
+this to function. Full documentation and example code is included in the
+API packages.
+
+
+## Introduction ##
+
+DeviceAtlas uses HTTP headers to accurately identify devices. This is achieved
+by passing the headers to a server-side DeviceAtlas API. The API then uses the
+headers to determine the correct set of properties for the request. These
+properties are then returned to the calling application.
+
+This approach is suitable for the vast majority of cases except for two
+situations:
+
+1. Apple Devices: The data passed from Apple devices in the HTTP headers does
+not contain any information to indicate which specific model is accessing the
+server. It only shows if it is an iPhone, iPad or iPod Touch but not, for
+example, if its an iPhone 4 or an iPhone 7. This is a large problem if device
+specific data is required for these devices. Client-side data can be used to
+augment the server-side DeviceAtlas data to more accurately identify Apple
+devices.
+
+2. Contextual information: Client-side data can help indicate the current
+context of the user/device such as the current device orientation of the device
+or if the user has cookies enabled. It can also improve the server-side
+property set for JavaScript and HTML5 properties for less well-known browsers.
+
+
+## Client-side Component ##
+
+The DeviceAtlas client-side component is a small JavaScript library that can
+be included on a webpage. The library gathers client-side properties and
+optionally creates a cookie containing the data. The cookie is used as a means
+of transferring the client-side data to the server but alternative approaches
+can be used such as sending the data in an Ajax request. The client-side data
+sent to the server must then be passed to the DeviceAtlas API along with the
+device HTTP headers. The API will use the HTTP headers and the client-side
+properties to detect Apple Devices. The resulting property set contains the
+merged server and client side properties.
+
+
+### Client-side Access to Properties ###
+
+The properties gathered by the client-side component are available to other
+JavaScript functions and can be accessed on the client-side by using the
+"DeviceAtlas" namespace.
+
+**Example:**
+
+```JavaScript
+// Does the browser support Web GL ?
+var supportsWebGl = DeviceAtlas.js.webGl;
+```
+
+The normal DeviceAtlas property name should be used to access the client-side
+property. A full list of the client side properties can be found on the
+[DeviceAtlas website](https://deviceatlas.com/resources/client-side-properties).
+
+
+### Server-side Access to Properties ###
+
+The client-side component creates a special cookie with the detected client
+properties. This cookie is used as a way to transmit the properties back to
+the server. Other approaches such as AJAX could also be used. The usage of the
+properties via the cookie is different in the Enterprise and Cloud APIs.
+
+By default, the cookie containing the properties is called "DAPROPS".
+
+#### Use with Enterprise API ####
+
+If the cookie is available and the DeviceApiWeb extension is used, the API will
+automatically use the cookie contents as a part of the detection. However it is
+also possible to pass the client-side properties manually to the APIs. Please
+refer to the technical API development documentation for details.
+
+Apache / NGINX / IIS web server modules handle the cookie automatically.
+
+** Compatibility requirements **
+
+For correct functionality an up-to-date JSON file and the following Enterprise
+API versions are required.
+
+- Java: 1.6 or later
+- Node.js: 2.1 or later
+- PHP: 1.6 or later
+- .NET: 1.6 or later
+- Python: 1.6 or later
+- Ruby: 1.6 or later
+- C++: 2.1.2 or later
+- C: 2.1.2 or later
+
+#### Use with Cloud API ####
+
+If the cookie is available and the API is configured to use the cookie, the API
+will automatically forward the cookie contents to the Cloud service and will be
+used as a part of the detection. Please refer to the technical API development
+documentation for details.
+
+** Compatibility requirements **
+
+For correct functionality the Cloud API 1.3 version or later is required.
+
+### Basic Server-side Usage ###
+
+1. Include the deviceatlas-X.X.min.js file on a web page.
+2. In the server-side web application, pass the contents of the DeviceAtlas
+   cookie to the DeviceAtlas API.
+
+NOTE: the cookie contents will only be set **after** the first request. It is
+recommended to not rely on the client-side properties for the very first page
+load.
+
+Please see the Example code bundled with the API for more information.
+
+### Custom Configuration ###
+
+To customise the cookie name or other cookie parameters like domain or a path
+you can use the configuration code below - this code must be included before the
+deviceatlas-X.X.min.js file.
+
+```JavaScript
+<script type="text/JavaScript">
+var DeviceAtlas = {
+    cookieName: 'DAPROPS',           // the cookie name
+    cookieExpiryDays: 1,             // the time the cookie expires in days
+    cookieDomain: '.yourdomain.tld', // custom domain
+    cookiePath: '/',                 // custom path
+    debug: false                     // expects bool|function - default false, pass true to use console.log or pass any callback function
+}
+</script>
+<script type="text/javascript" src="./deviceatlas-X.X.min.js"></script>
+```
+
+### Sending client-side data via URL ###
+
+In a restricted environment where cookies are not allowed it is possible to get
+the client-side data using the JavaScript getPropertiesAsString() method and
+pass it as a URL parameter.
+
+NOTE: When integrating with a web application, the value should be fetched from
+the URL and passed to the DeviceAtlas API.
+
+**Example:**
+
+```JavaScript
+<script type="text/JavaScript">
+
+window.onload = function() {
+    var img = document.createElement('img');
+    img.setAttribute('id', 'ad-banner');
+    img.setAttribute('src', './ads.php?DAPROPS=' +
+        encodeURIComponent(DeviceAtlas.getPropertiesAsString()));
+    document.body.appendChild(img);
+}
+
+</script>
+<script type="text/javascript" src="./deviceatlas-X.X.min.js"></script>
+```
+
+### Identification of Apple devices ###
+
+The DeviceAtlas Client-side Component augments the server side properties and
+allows for accurate identification of Apple devices. The following variants of
+iPhone and iPad models are identified. Please note there is a small selection
+of older devices that cannot be identified fully. In this case, all of the
+possible model names are returned.
+
+| Apple device | Without client-side | With client-side 1.5 |
+| ------------ | ------------------- | -------------------- |
+| iPhone | iPhone | iPhone/iPhone 3G/iPhone 3GS |
+| iPhone 3G | iPhone | iPhone/iPhone 3G/iPhone 3GS |
+| iPhone 3GS | iPhone | iPhone/iPhone 3G/iPhone 3GS |
+| iPhone 4 | iPhone | iPhone 4 |
+| iPhone 4S | iPhone | iPhone 4S |
+| iPhone 5 | iPhone | iPhone 5/iPhone 5C |
+| iPhone 5C | iPhone | iPhone 5/iPhone 5C |
+| iPhone 5S | iPhone | iPhone 5S |
+| iPhone 6 | iPhone | iPhone 6 |
+| iPhone 6 Plus | iPhone | iPhone 6 Plus |
+| iPhone 6S | iPhone | iPhone 6S |
+| iPhone 6S Plus | iPhone | iPhone 6S Plus |
+| iPhone SE | iPhone | iPhone SE |
+| iPhone 7 | iPhone | iPhone 7 |
+| iPhone 7 Plus | iPhone | iPhone 7 Plus |
+| iPad | iPad | iPad |
+| iPad 2 | iPad | iPad 2/iPad mini |
+| iPad 3 | iPad | iPad /retina display |
+| iPad 4 | iPad | iPad Retina (4th Gen) |
+| iPad Air | iPad | iPad Air/iPad mini 2/iPad mini 3 |
+| iPad Air 2 | iPad | iPad Air 2 |
+| iPad mini | iPad | iPad 2/iPad mini |
+| iPad mini 2 | iPad | iPad Air/iPad mini 2/iPad mini 3 |
+| iPad mini 3 | iPad | iPad Air/iPad mini 2/iPad mini 3 |
+| iPad mini 4 | iPad | iPad mini 4 |
+| iPad Pro | iPad | iPad Pro |
+
+
+### Adding device properties ###
+
+The capabilities of the Client-side component can be customised by adding or
+replacing functions to detect device properties.
+
+**Example:**
+
+```JavaScript
+
+<script type="text/javascript">
+
+/**
+ * Adding property to see if its a modern browser:
+ *
+ * For more details: https://www.w3.org/TR/html5/
+ */
+var DeviceAtlas = {
+    properties: {
+        isModernBrowser: function() {
+            return DeviceAtlas.cookieSupport &&
+                DeviceAtlas.js.webWorkers &&
+                DeviceAtlas.js.webSockets &&
+                DeviceAtlas.css.animations &&
+                DeviceAtlas.html.video &&
+                DeviceAtlas.html.svg &&
+                DeviceAtlas.js.webGl &&
+                DeviceAtlas.js.localStorage;
+        }
+    }
+}
+
+</script>
+<script type="text/javascript" src="./deviceatlas-X.X.min.js"></script>
+```
+
+### Client-side Component Variants ###
+
+#### Standard Library ####
+
+The standard version of the Client-side Component is distributed in the
+deviceatlas-x.x.min.js file.
+
+It provides the detection of
+[the full property set](https://deviceatlas.com/resources/client-side-properties).
+
+#### Lite Variant ####
+
+The Lite variant, a subset of the standard component for optimisation purposes,
+is distributed in the deviceatlas-lite-x.x.min.js file.
+
+It solely identifies those device properties that are required to distinguish
+the underlying hardware of iOS based devices.
+
+#### Custom Build ####
+
+From the DeviceAtlas site, a customised Client-side component with a subset of
+properties can be created tailored to specific needs.
+
+The resulting JavaScript file will be optimised in terms of size and speed to
+improve end-user experience.
+
+Please see the [DeviceAtlas Client-side Component generator](https://deviceatlas.com/resources/clientside).
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+_ Copyright (c) Afilias Technologies Limited 2017. All Rights Reserved. _
+
+https://deviceatlas.com
+
+
+<!-- HTML+JS for document formatting when opened in browser --> 
+<div class="btn-group" id="main-menu" style="float:right"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="README.html">Main</a></li><li><a href="README.CloudApi.html">Cloud Client API</a></li><li class="disabled"><a href="README.ClientSide.html">Client-side Component</a></li><li class="divider"></li><li><a href="ApiDocs/index.html">DeviceAtlas Cloud Client API docs</a></li></ul></div></xmp><script src="https://deviceatlas.com/sites/all/libraries/strapdown/strapdown.js"></script></html>

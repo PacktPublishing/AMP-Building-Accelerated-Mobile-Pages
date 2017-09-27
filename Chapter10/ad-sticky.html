@@ -1,0 +1,75 @@
+<!-- Demonstrates sticky ads in AMP -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch10/ad-sticky.html" />
+    <title>The AMP Book | amp-ad sticky ads</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="amp-3p-iframe-src" content="https://alt.theampbook.com/ch10/remote.html">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-ad"
+    src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async custom-element="amp-sticky-ad" src="https://cdn.ampproject.org/v0/amp-sticky-ad-1.0.js"></script>
+
+    <style amp-custom>
+      body { 
+        width:100%;
+        max-width:1280px;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Helvetica;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0.5rem;
+      }
+      main {
+        text-align: left;
+        padding:0 0.5rem 0.5rem 0.5rem;
+      }
+    </style>
+
+  </head>
+  <body>
+      <h1>amp-ad sticky ads</h1>
+  <main>
+    <p>This page has a sticky ad—it sticks to the bottom of the page, and it's dismissable.</p>
+
+    <p>Sticky ads are created by wrapping an amp-ad inside an amp-sticky-ad component, like this:
+
+    <pre>
+     &lt;amp-sticky-ad layout="nodisplay"&gt;
+       &lt;amp-ad
+         width="320"
+         height="50"
+         type="doubleclick"
+         data-slot="/12345678/sticky"&gt;
+     &lt;/amp-ad&gt;
+    &lt;/amp-sticky-ad&gt;
+    </pre>
+    </p>    
+ 
+    <p>Following this brief diversion, the sole purpose of which is to ensure that there is enough content so that there's more than one viewport of content (lorem ipsum meh), we'll see a sticky ad.</p>
+
+    <p>We will, in fact, be coming to the end of this diversion very soon, very soon indeed. In the meantime, I wanted to tell you something: 
+    "Meow" means "woof" in cat."</p>
+
+    <p>Following this brief diversion, the sole purpose of which is to ensure that there is enough content so that there's more than one viewport of content (lorem ipsum meh), we'll see a sticky ad.</p>
+
+    <p>We will, in fact, be coming to the end of this diversion very soon, very soon indeed. In the meantime, I wanted to tell you something: 
+    "Meow" means "woof" in cat."</p>    
+
+     <amp-sticky-ad layout="nodisplay">
+       <amp-ad
+       width="320"
+       height="50"
+       type="doubleclick"
+       data-slot="/35096353/amptesting/formats/sticky">
+     </amp-ad>
+    </amp-sticky-ad>
+    </main> 
+  </body>
+</html>

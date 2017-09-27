@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>DeviceAtlas redirection example | Desktop Computer Browser</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css" media="all" />
+  </head>
+  <body>
+    <h1>Desktop experience</h1>
+    <div id="contents" class="clearfix">
+
+      <div id="panel-left">
+
+        <div id="description" class="row">
+          <p>
+            This is the layout of our sample site intended for Desktop Computer
+            Browser experience!
+          </p>
+        </div>
+        <div class="row">
+          <h2>You have been redirected to this page because</h2>
+          <p>You are using a desktop browser.</p>
+          <p>
+            You are using a device that is masquerading itself as desktop to
+            get a desktop experience.
+          </p>
+          <p>
+            Your machine is not detected as a desktop, tablet or mobile but you
+            are being redirected to this website because this is the default
+            website.
+          </p>
+        </div>
+        <div class="row">
+          <h2>See</h2>
+          <p>
+            <strong>/Examples/Redirection/index.php</strong>
+            <br/>
+            All requests first go to this controller script. This script uses 
+            DeviceAtlas to detect device type and decides which website to
+            redirect to.
+          </p>
+          <p>
+            <strong>/Examples/Redirection/desktop/</strong>
+            <br/>
+            The files of this page are located in this directory.
+          </p>
+        </div>
+
+      </div>
+
+      <div id="panel-right">
+
+        <div class="row">
+          <h2>How does it work</h2>
+          <p>
+            If we have different web sites and each one is created to give the best
+            content and user experience to a specific device type. Users will enter our
+            main web-site URL in their browsers, the source code which gets this first
+            request will use DeviceAtlas DeviceApi to detect the device type, then based
+            on the conclusions, the user will be redirected to the web-site which provides
+            the best experience for her/his device.</br>
+            In this example four directories will mimic four different websites that give
+            specific service to "desktop browsers", "mobile device" and "tablet pcs". Each
+            directory contains a sample "index.html".
+          </p>
+        </div>
+
+        <div class="row">
+          <h2>Files used in this example</h2>
+          <p>
+            In this example there are four directories representing four websites.
+            The requests are redirected to one of this directories:
+          </p>
+          <p>
+            <strong>Landing page:</strong><br/>
+            <span>/Examples/Redirection/index.php</span><br/>
+            <strong>Desktop computer browsers:</strong><br/>
+            <span>/Examples/Redirection/desktop/index.html</span><br/>
+            <strong>Tablet mobile computers:</strong><br/>
+            <span>/Examples/Redirection/tablet/index.html</span><br/>
+            <strong>High-end mobile devices:</strong><br/>
+            <span>/Examples/Redirection/mobile/highend/index.html</span><br/>
+            <strong>Low-end mobile devices:</strong><br/>
+            <span>/Examples/Redirection/mobile/lowend/index.html</span><br/>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

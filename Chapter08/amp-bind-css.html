@@ -1,0 +1,92 @@
+<!-- amp-bind: basic text manipulation example -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch8/amp-bind-css.html" />
+    <title>The AMP Book</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script> 
+
+    <style amp-custom>
+      .main { 
+        text-align: center;
+        font-family: Helvetica;
+      }
+
+      h3 {
+        color: #253b48;  
+        margin: 10px 0 0 0;
+      }
+
+      button, input{
+        width:140px;
+        line-height: 40px;
+        vertical-align: middle;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        background: none;
+        border: 2px solid #333;
+        color: #253b48;      
+        margin:10px auto;  
+        padding:0;
+      }
+
+      button.small {
+        width:20px;
+        height:20px;
+
+      }
+
+      input {
+        padding: 0 5px;
+        box-sizing: content-box;
+        -webkit-appearance: none;
+        border-radius:0;
+      }
+
+
+      .hide {
+        visibility: hidden;
+      }
+
+      .show {
+        visibility: visible;
+      }
+
+      .container {
+        width:100%;
+        background-color: #efefef;
+      }
+
+      #target {
+        width:100%;
+        height:100%;
+        margin: auto;
+      }
+
+
+    </style>
+  </head>
+  <body class="main">
+    <h3>amp-bind CSS example</h3>
+
+    <p>This example manipulates CSS class with <code>&lt;amp-bind&gt;</code></p>
+    <div class="container">
+      <amp-img src="img/bridge_600x400.jpg"
+               width="600" height="400"
+               layout="responsive"
+               class="show"
+               [class]="(displayStatus||'show')">
+      </amp-img>
+      <small class="image-credit"><em>Image: <a href="https://unsplash.com/@johannesb/likes?photo=71vAb1FXB6g">Joshua Sortino / Unsplash</a></em></small>
+
+    </div>
+    <button on="tap:AMP.setState({displayStatus: 'show'})">SHOW IT</button>
+    <button on="tap:AMP.setState({displayStatus: 'hide'})">HIDE IT</button>
+
+  </body>
+</html>

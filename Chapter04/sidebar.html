@@ -1,0 +1,205 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch4/sidebar.html" />
+    <title>The AMP Book News Daily</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|PT+Sans" rel="stylesheet"> 
+
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+
+    <style amp-custom>
+      html, body, ul {
+        margin:0;
+        padding:0;
+        font-family: 'Droid Serif', serif;
+      }
+      header {
+        background-color: #005689;
+        padding:0.5rem;
+      }
+
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      .primary-nav li, .primary-nav span, .primary-nav a {
+        font-family: 'PT Sans', sans-serif;
+        color:#fff;
+        font-size: 1.5rem;
+      }
+
+      .primary-nav a {
+        text-decoration:none;
+        padding-right: 0.5rem;
+      }             
+
+      header li {
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        padding-right: 10px;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      h2 {
+        color: #005689;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        margin:5px;
+      }
+
+      img.feature-img {
+        width: 100%;
+      }
+      p {
+        padding:0.5rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        color: #dcdcdc;
+        background: #484848;
+        padding:0.5rem;
+      }
+      
+      .drop-caps::first-letter {
+        color: #903;
+        float: left;
+        font-family: Georgia;
+        font-size: 3.5rem;
+        line-height: 3rem;
+        padding-top: 5px;
+        padding-right: 8px;
+        padding-left: 3px;
+      }
+
+      .image-credit, .image-credit a {
+        color:#666;
+      }
+
+      .amp-carousel-button {
+        background:0;
+      }
+
+      .amp-carousel-button-next {
+        right:0;
+      }
+
+      .amp-carousel-button-prev {
+        left:0;
+      }
+
+      .amp-carousel-button-next::after {
+        content: '⟩';
+        right:0;
+        text-align: right;
+        background:linear-gradient(to right, rgba(0,86,137,0) 0%,rgba(0,86,137,1) 50%);
+        color: #fff;
+        position: absolute;
+        bottom:0;
+        font-size: 2rem;
+        line-height: 2rem;
+        font-weight: bold;
+        width:20px;
+      }
+
+      .amp-carousel-button-prev::after {
+        content: '⟨';
+        left:0;
+        text-align:left;  
+        background:linear-gradient(to left, rgba(0,86,137,0) 0%,rgba(0,86,137,1) 50%);
+
+
+        color: #fff;
+        position: absolute;
+        bottom:0;
+        width:20px;
+        font-size: 2rem;
+        line-height: 2rem;
+        font-weight: bold;
+      }            
+
+    </style>
+  </head>
+  <body>
+    <amp-sidebar id='sidenav' layout='nodisplay'>
+      <ul>
+        <li>Nav item 1</li>
+        <li>Nav item 2</li>
+        <li>Nav item 3</li>
+      </ul>
+    </amp-sidebar>
+    <button on='tap:sidenav.open'>Menu</button>
+  
+    <header>
+      <div class="logo">theampbook</div>
+      <nav>
+      
+        <amp-carousel height="1.8rem"
+        layout="fixed-height"
+        controls
+        type="carousel" class="primary-nav fade">
+
+          <span><a href="#">news</a></span>
+          <span><a href="#">sports</a></span>
+          <span><a href="#">arts</a></span>
+          <span><a href="#">tech</a></span>
+          <span><a href="#">education</a></span>
+          <span><a href="#">health</a></span>
+          <span><a href="#">entertainment</a></span>
+          <span><a href="#">living</a></span>
+          <span><a href="#">politics</a></span>       
+
+      </amp-carousel>
+
+      </nav>
+    </header>
+    <article>
+      <h1>Breaking: AMP is fast</h1>
+      <amp-img src = "img/feature.jpg"  
+            srcset = "img/feature-1200.jpg 1200w,
+                      img/feature-lrg.jpg 1080w,
+                      img/feature-med.jpg 768w,
+                      img/feature.jpg 320w"
+             width = "768"
+            height = "305"
+            layout = "responsive" >
+            <amp-img placeholder
+                     src="img/feature-tiny.jpg"
+                     width="768"
+                     height="305"  
+                     layout="responsive">
+            </amp-img>
+      </amp-img>
+      <small class="image-credit"><em>Image: <a href="https://www.flickr.com/photos/quintanomedia/14979389447">Anthony Quintano / Flickr</a></em></small>       
+      <p class="drop-caps">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis at ligula sit amet pellentesque. Proin cursus malesuada aliquet. Aenean volutpat ultricies ipsum, in condimentum risus sagittis vitae. Suspendisse quam mauris, molestie sed consectetur sed, pretium in tortor.</p>
+
+
+      <p>Donec sollicitudin risus ac odio commodo vestibulum. Cras semper convallis turpis, ut pharetra quam ultricies quis. Vivamus sagittis diam tellus. Quisque efficitur ante et nunc elementum sagittis.</p>
+
+
+
+    </article>
+    <footer>
+      privacy policy
+    </footer>
+  </body>
+</html>

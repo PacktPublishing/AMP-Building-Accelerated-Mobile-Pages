@@ -1,0 +1,207 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch3/related-flex.html" />
+    <title>The AMP Book News Daily</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
+    <style amp-custom>
+      html, body, ul {
+        margin:0;
+        padding:0;
+      }
+
+      header {
+        background-color: #005689;
+        padding:0.5rem;
+      }
+
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+      }
+
+      header li {
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        padding-right: 10px;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+      }
+
+      h2 {
+        color: #005689;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        margin:5px;
+      }
+
+      img.feature-img {
+        width: 100%;
+      }
+      p {
+        padding:0.5rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        color: #dcdcdc;
+        background: #484848;
+        padding:0.5rem;
+      }
+
+      figure {
+        margin:5px;
+      }
+
+      figcaption {
+        font-family: Georgia;
+        font-weight: bold;
+      }
+
+      .related-thumb{
+        display:flex;
+        align-items: center;
+        flex-wrap:nowrap;
+      }
+
+      .related-thumb amp-img {
+        min-width: 125px;
+        margin-right:5px;
+      }
+
+      .author {
+        color: #bbb;
+        display:block;
+      }
+
+      .related-items {
+        display:flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0.5rem 0 1rem 0;
+      }
+
+      .image-credit, .image-credit a {
+        color:#666;
+      }
+
+    </style>
+  </head>
+  <body>
+  
+    <header>
+      <div class="logo">theampbook</div>
+      <nav>
+        <ul class="primary-nav">
+          <li>news</li>
+          <li>sports</li>
+          <li>arts</li>
+        </ul>
+      </nav>
+    </header>
+    <article>
+      <h1>Breaking: AMP is fast</h1>
+      <amp-img src = "img/feature.jpg"  
+            srcset = "img/feature-1200.jpg 1200w,
+                      img/feature-lrg.jpg 1080w,
+                      img/feature-med.jpg 768w,
+                      img/feature.jpg 320w"
+             width = "768"
+            height = "305"
+            layout = "responsive" >
+      </amp-img>
+      <small class="image-credit"><em>Image: <a href="https://www.flickr.com/photos/quintanomedia/14979389447">Anthony Quintano / Flickr</a></em></small>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis at ligula sit amet pellentesque. Proin cursus malesuada aliquet. Aenean volutpat ultricies ipsum, in condimentum risus sagittis vitae. Suspendisse quam mauris, molestie sed consectetur sed, pretium in tortor.</p>
+
+
+      <p>Donec sollicitudin risus ac odio commodo vestibulum. Cras semper convallis turpis, ut pharetra quam ultricies quis. Vivamus sagittis diam tellus. Quisque efficitur ante et nunc elementum sagittis.</p>
+
+      <h2>Related content</h2>
+      <ul class="related-items">
+        <li>
+         <figure class="related-thumb">
+            <amp-img src = "img/penguin.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "fixed">          
+            </amp-img>
+            <figcaption>
+              If a penguin can find a soul mate, I'm sure I can too
+              <span class="author">Rebekah Crane</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img src = "img/cat.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "fixed">           
+            </amp-img>
+            <figcaption>
+              What greater gift than the love of a cat
+              <span class="author">Charles Dickens</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img src = "img/swan.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "fixed">             
+            </amp-img>
+            <figcaption>
+              A snow-white swan with a scary tattoo holding a chain saw
+              <span class="author">Jim Benton</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img src = "img/dog.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "fixed">            
+            </amp-img>
+
+            <figcaption>
+              Charley is a mind-reading dog 
+              <span class="author">John Steinbeck</span>
+            </figcaption>
+          </figure>
+        </li>      
+
+      </ul>
+
+      <small class="image-credit">
+        <em>Image credits:
+          <a href="https://www.flickr.com/photos/cmichel67/17588862165/">Christopher Michel</a>,        
+          <a href="https://www.flickr.com/photos/mamchenkov/276090867/">Leonid Mamchenkov</a>, 
+          <a href="https://www.flickr.com/photos/149424226@N07/33934835375/">Jan Moltzen</a>,
+          <a href="https://www.flickr.com/photos/126376801@N02/14679953976/">Pie Pec</a>
+        </em>
+      </small>
+
+    </article>
+    <footer>
+      privacy policy
+    </footer>
+  </body>
+</html>

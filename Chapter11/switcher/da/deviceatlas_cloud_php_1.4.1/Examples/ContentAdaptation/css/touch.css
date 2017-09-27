@@ -1,0 +1,12 @@
+a {
+  border: 2px solid #999;
+  padding: 20px;
+  font-size: 14px;
+}
+
+button {
+  border: 2px solid #999;
+  padding: 20px;
+  font-size: 14px;
+  background-color: #eee;
+}

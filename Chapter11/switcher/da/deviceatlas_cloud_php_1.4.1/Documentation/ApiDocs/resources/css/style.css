@@ -1,0 +1,560 @@
+/* > > > universal clearfix hack */
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix { display: inline-block; }
+
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* < < < universal clearfix hack */
+
+html, body, div, span, object, h1, h2, h3, h4, h5, h6, p, a, pre, img, ul, li,
+dt, dl, dd, form, label, table, caption, tbody, tfoot, thead, tr, th, td, input, code {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0; 
+  vertical-align: baseline;
+  background: transparent;
+  font-family: Lato, Raleway, Helvetica, Arial, sans-serif;
+  color: #4A4A4A;
+  font-size: 13px;
+  line-height: 140%;
+}
+
+h1 {
+  font-size: 22px;
+  color: #415a8d;
+  padding: 2px 0 15px 0;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 17px;
+  font-weight: normal;
+  padding: 0 5px;
+  border-radius: 1px;
+  -moz-border-radius: 1px;
+  color: #3278BF;
+  background-color: #E3F0FA;
+  border: 1px solid #C5E2FA;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #415a8d;
+}
+
+#interface h1 {
+  color: #FFA078;
+}
+
+#interface h2 {
+  color: #FFA078;
+  background-color: #FFF4F0;
+  border: 1px solid #FFEAE0;
+}
+
+#interface h3 {
+  color: #6A96EF;
+}
+
+h4 {
+  color: #999;
+}
+
+p, span {
+
+}
+
+a {
+  color: #3278BF;
+  text-decoration: none;
+  border-bottom: 1px dotted #3278BF;
+}
+
+a:hover {
+  color: #F36A0E;
+  border-bottom: 1px dotted #F36A0E;
+}
+
+ul {
+  list-style-type: none;
+}
+
+dt {
+  color: #999;
+}
+
+dd {
+  margin-left: 20px;
+}
+
+pre {
+  padding: 1px 5px!important;
+  background-color: #f7f7f7!important;
+  border: 1px solid #eee!important;
+  border-radius: 1px;
+  -moz-border-radius: 1px;
+  font-family: "Courier New", Courier, monospace!important;
+  color: #333;
+  line-height: 120%;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+pre.compact {
+  display: inline!important;
+}
+
+pre span {
+  display: inline!important;
+  padding: 0px!important;
+  font-family: "Courier New", Courier, monospace!important;
+  line-height: 100%;
+}
+
+#static-properties div.property span.property-type,
+#properties div.property span.property-type,
+#static-methods div.method span,
+#methods div.method span {
+  color: #999;
+}
+
+#static-properties div.property span.property-type a,
+#properties div.property span.property-type a {
+  color: #bbb;
+  border-color: #bbb;
+}
+
+#static-properties div.property span.property-type a:hover,
+#properties div.property span.property-type a:hover {
+  color: #F36A0E;
+  border-color: #F36A0E;
+}
+
+#static-properties div.property span.property-type-comment,
+#properties div.property span.property-type-comment {
+  color: #444;
+  font-weight: bold;
+}
+
+
+#static-properties div.property span.property-value,
+#properties div.property span.property-value,
+#static-methods pre span.param-name,
+#methods pre span.param-name {
+  color: #4EAD4E;
+}
+
+#static-properties div.property span.property-value,
+#properties div.property span.property-value {
+
+}
+
+#consts,
+#properties,
+#static-properties,
+#static-methods,
+#methods {
+  padding: 20px 0 10px 7px; 
+}
+
+#static-properties div.property-specs,
+#properties div.property-specs,
+#static-methods div.method-specs,
+#methods div.method-specs {
+  padding: 10px 0 10px 10px;
+}
+
+#static-methods p.method-comment,
+#methods p.method-comment,
+#consts p.const-comment,
+#properties p.property-comment,
+#static-properties p.property-comment {
+  padding: 10px 0;
+}
+
+/* method */
+
+#static-methods div.method,
+#methods div.method {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 7px;
+  padding-bottom: 20px;
+}
+
+#static-properties div.last,
+#properties div.last,
+#consts div.last,
+#static-methods div.last,
+#methods div.last {
+  border-bottom: none!important;
+}
+
+#static-methods div.method-return,
+#static-methods div.method-args,
+#methods div.method-return,
+#methods div.method-args {
+  padding-left: 20px;
+}
+
+#static-methods dl.method-atts,
+#methods dl.method-atts {
+  margin-bottom: 15px;
+}
+
+#static-methods div.method-args dt,
+#methods div.method-args dt {
+  font-weight: bold;
+  color: #4EAD4E;
+}
+
+#static-methods div.method-throws ul,
+#methods div.method-throws ul {
+  padding-left: 20px;
+}
+
+#static-methods div.argument,
+#methods div.argument,
+#static-methods div.method-throws ul li,
+#methods div.method-throws ul li {
+  padding: 3px 0 3px 0;
+}
+
+div.argument span a {
+  color: #aaa;
+  border-bottom: 1px dotted #bbb;
+}
+
+div.argument span a:hover {
+  color: #F36A0E;
+  border-color: #F36A0E;
+}
+
+/* class */
+
+#class-specs {
+
+}
+
+#class-atts {
+  padding: 15px 0;
+}
+
+#class-info {
+  padding-top: 15px;
+  color: #aaa;
+}
+
+#class-info dt {
+  font-weight: bold;
+}
+
+/* properties */
+
+#static-properties div.property,
+#properties div.property {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 7px;
+  padding-bottom: 0px;
+}
+
+#static-properties h3 span,
+#properties h3 span {
+  color: #4EAD4E;
+}
+
+/* constants */
+
+#consts div.const {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 7px;
+  padding-bottom: 10px;
+}
+
+#consts div.const-specs {
+  padding-left: 10px;
+}
+
+#consts h3 span {
+  color: #4EAD4E;
+}
+
+#consts h3 span {
+  color: #4EAD4E;
+}
+
+/* class index */
+
+#class-index a {
+  display: block;
+  border-bottom: 0;
+  color: #777;
+}
+
+#class-index a:hover {
+  color: #111;
+}
+
+#class-index li {
+  background-color: #fafafa;
+  padding: 3px 5px;
+  border-bottom: 1px solid #fff;
+  overflow: hidden;
+}
+
+#class-index li:hover {
+  border-bottom: 1px solid #aaa;
+}
+
+#index-consts,
+#index-static-properties,
+#index-properties,
+#index-static-methods,
+#index-methods {
+  background-color: #eee!important;
+}
+
+#go-back {
+  background-color: #dfdfdf!important;
+}
+
+#index-consts a,
+#index-static-properties a,
+#index-properties a,
+#index-static-methods a,
+#index-methods a {
+  color: #555;
+}
+
+
+dd.deprecated {
+  color: #FF5F00;
+}
+
+dt.deprecated {
+  color: #FF5F00;
+  font-weight: bold;
+}
+
+html {
+  background: #fff;
+}
+
+body {
+  width: 950px;
+  margin: 10px auto;
+}
+
+#class-index {
+  margin-top: 20px;
+  width: 200px;
+  float: left;
+}
+
+#doc {
+  width: 700px;
+  padding: 15px 0;
+  float: right;
+}
+
+
+span.spacer {
+  display: block;
+  height: 7px;
+}
+
+
+#goto-top {
+  position: fixed;
+  padding: 10px;
+  border: 1px dotted #3278BF;
+  right: 10px;
+  bottom: 10px;
+}
+
+pre.xcomments {
+  margin-top: 5px;
+  padding: 0;
+  background-color: white!important;
+  border: 0!important;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+pre.xcomments strong {
+  color: #997799;
+}
+
+pre.xcomments span.sc,
+pre.xcomments span.brace {
+  color: #FFA500!important;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+pre.xcomments span.type {
+
+}
+
+pre.xcomments span.key {
+  color: #1E90FF!important;
+  font-weight: bold;
+}
+
+pre.xcomments span.default {
+  background-color: #eee;
+  color: #111!important;
+  font-weight: bold;
+}
+
+pre.xcomments span.or {
+  color: #eee;
+}
+
+/* index */
+
+#doc-index {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#doc-index h1 {
+  color: #888;
+  padding: 5px 0 7px 0;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+
+#doc-index h2,
+#doc-index h3 {
+  font-size: 20px;
+  font-weight: normal;
+  padding: 0 5px;
+  border-radius: 1px;
+  -moz-border-radius: 1px;
+  cursor: pointer
+}
+
+#doc-index h2 {
+  color: #eee;
+  background-color: #333;
+  border: 1px solid #000;
+  display: block;
+  margin-top: 3px;
+}
+
+#doc-index h3 {
+  color: #333;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+}
+
+#doc-index h3.interface {
+  margin-top: 2px;
+}
+
+#doc-index ul {
+  padding: 0 20px;
+}
+
+#doc-index ul.namespace {
+  padding: 5px 20px;
+  border: 1px solid #eee;
+  border-top: 0;
+}
+
+#doc-index ul.classes,
+#doc-index ul.interfaces {
+  padding: 5px;
+  border: 1px solid #eee;
+  border-top: 0;
+}
+
+#doc-index ul li a {
+  border: 0;
+  font-size: 14px;
+  display: block;
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+#doc-index ul li a:hover {
+  border-bottom: 1px solid #111;
+  color: #000;
+}
+
+#doc-index #doc-header {
+  padding: 0 20px;
+
+}
+
+#doc-index #doc-footer {
+  padding: 20px;
+  text-align: right;
+}
+
+#search-input {
+  border: 1px solid #ccc;
+  padding: 3px;
+}
+
+#doc-index #search-input {
+  margin: 20px 00px 2px 20px;
+  width: 300px;
+}
+
+#doc-index li a.last {
+  border-color: #fff;
+}
+
+#doc-index li a.last:hover {
+  border-color: #111;
+}
+
+#search-input:focus {
+  border-bottom: 1px solid #111;
+}
+
+
+#search-input-container {
+  padding: 0px!important;
+}
+
+#search-input-container:hover {
+  border-color: #fff!important;
+}
+
+#search-input-container input {
+  width: 192px;
+  background-color: #ccc;
+  border-color: #aaa;
+  color: #222;
+}
+
+#go-back a {
+  color: #444;
+}
+
+#doc h2 {
+  cursor: pointer;
+}
+
+#class-specs pre {
+  padding: 10px 10px 0px 10px!important;
+  background-color: #fff!important;
+  border: 0!important;
+  color: #777;;
+}

@@ -1,0 +1,98 @@
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+html, body, p, td, span, h1, h2, h3, ul, li, img{
+  font-family: Helvetica,Arial,"Lucida Grande",sans-serif;
+  font-size: 14px;
+  color: #222;
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+}
+
+body {
+  border: 7px solid #b6dcfd;
+  margin: 0px auto;
+  width: 890px;
+}
+
+h1 {
+  font-size: 20px;
+  padding: 10px;
+  background-color: #e8e8e8;
+  margin-bottom: 3px;
+}
+
+h2 {
+  font-size: 16px;
+  padding: 7px 10px;
+  background-color: yellow;
+}
+
+p {
+  padding: 10px;
+}
+
+#contents {
+
+}
+
+#panel-left {
+  float: left;
+  padding: 15px 10px 15px 15px;
+  width: 420px;
+}
+
+#panel-right {
+  float: right;
+  padding: 15px 15px 15px 10px;
+  width: 420px;
+}
+
+div.row {
+  border: 5px solid #aaa;
+  margin-bottom: 15px;
+}
+
+#description {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+#description p {
+  color: #555;
+}
+
+table td {
+  padding: 2px;
+  border-top: 1px dotted #ccc;
+}
+
+table td.label {
+  text-align: right;
+  color: #888;
+}
+
+#image-container {
+  background-color: #000;
+  border: 15px solid #fff;
+}
+
+#image-container p {
+  color: #aaa;
+}
+
+#image-container img {
+  display: block;
+  width: 100%;
+}
+
+#links {
+  padding: 10px;
+  text-align : center;
+}

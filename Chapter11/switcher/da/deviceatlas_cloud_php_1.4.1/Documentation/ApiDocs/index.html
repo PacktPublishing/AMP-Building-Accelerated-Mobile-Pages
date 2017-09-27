@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+
+This documentation was created by Artaengine doxer PHP source documenter.
+http://artaengine.com
+
+ -->
+<html>
+  <head>
+    <title>The DeviceAtlas DeviceApi documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="Project administrator for Artaengine"/>
+    <link rel="shortcut icon" type="image/x-icon" href="resources/images/fav.png"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    <script src="resources/js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+        $(document).ready(function () {
+            $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+                    return function (elem) {
+                    return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+
+            $('#search-input').keyup(function (e) {
+                var text = $(this).val();
+                $('li.class, li.interface').hide();
+                $("li.class a:contains('"+text+"'), li.interface a:contains('"+text+"')").parent().show();
+            });
+
+            $('h2.namespace').click(function (e) {
+                var id = $(this).attr('id');
+                $('#'+id.substring(0, id.length - 6)).toggle('fast');
+            });
+
+            $('h3.class').click(function (e) {
+                var id = $(this).attr('id');
+                $('#'+id.substring(0, id.length - 6)).toggle('fast');
+            });
+
+            $('h3.interface').click(function (e) {
+                var id = $(this).attr('id');
+                $('#'+id.substring(0, id.length - 6)).toggle('fast');
+            });
+
+            removeLastLiBorder();
+        });
+
+        function removeLastLiBorder() {
+            $('li.last').removeClass('last');
+            $('ul.classes, ul.interfaces').each(function () {
+                $('#'+$(this).attr('id')+' li a').last().addClass('last');
+            });
+        }
+    //]]>
+    </script>
+  </head>
+  <body id="doc-index">
+    <h1>The DeviceAtlas DeviceApi documentation</h1>
+    <div id="doc-header"></div>
+    <p>
+      <input type="text" id="search-input" placeholder="Search..."/>
+    </p>
+    <!-- list of namespaces, classes and interfaces -->
+    <div><ul id="index"><li>
+  <h2 id="g-namespace-title" class="namespace">DeviceAtlas Cloud Client API</h2>
+  <ul id="g-namespace" class="namespace"><h3 id="g-classes-title" class="class">Classes</h3>
+<ul id="g-classes" class="classes">
+<li class="class"><a href="-/classes/DeviceAtlasCloudClient.html">DeviceAtlasCloudClient</a></li>
+
+</ul>
+</ul>
+</li>
+</ul>
+</div>
+    <div id="doc-footer">(c) 2014 Afilias Technologies Ltd (dotMobi). All rights reserved.</div>
+  </body>
+</html>

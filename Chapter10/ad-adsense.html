@@ -1,0 +1,83 @@
+<!-- Demonstrates Adsense ad in AMP page -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch10/ad-adsense.html" />
+    <title>The AMP Book | amp-ad and adsense</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="amp-3p-iframe-src" content="https://alt.theampbook.com/ch10/remote.html">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-ad"
+    src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+    <style amp-custom>
+      body { 
+        width:100%;
+        max-width:1280px;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Helvetica;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0.5rem;
+      }
+      main {
+        text-align: left;
+        padding:0 0.5rem 0.5rem 0.5rem;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>adsense with amp-ad</h1>
+    <main>
+      <p>For ads that are placed <em>above-the-fold</em>, it's recommended to use a fixed height layout, like this one:
+      <pre>
+      &lt;amp-ad
+        layout="fixed-height"
+        height="100"
+        type="adsense"
+        data-ad-client="ca-pub-12345678910234"
+        data-ad-slot="1234567890"&gt;
+      &lt;/amp-ad&gt;
+      </pre>
+      </p>
+
+        <amp-ad
+          layout="fixed-height"
+          height=100
+          type="adsense"
+          data-ad-client="ca-pub-3696028517726844"
+          data-ad-slot="4403458060">
+        </amp-ad>  
+      <p>Following this brief diversion, the sole purpose of which is to ensure that there is enough content so that the next ad will be <em>below-the-fold</em>, we'll see a below-the-fold ad.</p>
+
+      <p>We will, in fact, be seeing the below-the-fold ad very soon, very soon indeed. In the meantime, I have an important question for you: What greater gift than the love of a cat?</p>
+
+      <p>For below-the-fold ads, it's recommended to use a responsive layout, like this:
+        <pre>
+      &lt;amp-ad
+        layout="responsive"
+        width="300"
+        height="250"
+        type="adsense"
+        data-ad-client="ca-pub-12345678910234"
+        data-ad-slot="1234567890"&gt;
+      &lt;/amp-ad&gt;
+        </pre>
+      </p>      
+      <amp-ad
+       layout="responsive"
+       width=300
+       height=250
+       type="adsense"
+       data-ad-client="ca-pub-3696028517726844"
+       data-ad-slot="4403458060">
+      </amp-ad>
+    </main> 
+  </body>
+</html>

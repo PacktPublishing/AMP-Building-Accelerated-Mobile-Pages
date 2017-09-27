@@ -1,0 +1,67 @@
+<!-- Demonstrates amp-live-list
+     The purpose is to simulate server updates by nanually uncommenting the amp-live-list items one by one.
+     Save the page after uncommenting each line, BUT DON'T RELOAD IN BROWSER, wait for it to update automatically! -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch7/amp-live-list-example.html" />
+    <title>The AMP Book</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+      <script async custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js"></script>
+
+
+
+  <style amp-custom>
+    .main { 
+      width:100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    div[items] div, button{
+      width:270px;
+      height:60px;
+      line-height: 60px;
+      vertical-align: middle;
+      margin:10px auto;
+      background-color: #253b48;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 21px;
+    }
+
+    button {
+      background: none;
+      border: 2px solid #333;
+      margin:10px auto;
+      color: #253b48;
+    }
+
+  </style>
+
+  </head>
+  <body>
+    <div class="main">
+    <h1>amp-live-list example</h1>
+    <amp-live-list id="my-live-list" data-poll-interval="20000" data-max-items-per-page="10">
+      <button update on="tap:my-live-list.update" >
+        Show new updates!
+      </button>
+
+      <div items>
+        <div id="item-1" data-sort-time="1">Item #1</div>
+        <div id="item-2" data-sort-time="2">Item #2</div>
+        <div id="item-3" data-sort-time="3">Item #3</div>
+        <div id="item-4" data-sort-time="1">Item #4</div>
+        <div id="item-4" data-sort-time="1" data-update-time="6">Item #4 update!</div>
+        <!-- <div id="item-1" data-sort-time="2" data-tombstone>Item #1</div> -->
+      </div>
+
+    </amp-live-list>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!-- Tracks clicks on social share icons -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch10/ga-social.html" />
+    <title>The AMP Book - amp-analytics social sharing</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    <style amp-custom>
+      body {
+        font-family: Arial;
+        width:100%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0.5rem;
+      } 
+      button {
+        width:140px;
+        line-height: 30px;
+        vertical-align: middle;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        border: 2px solid #333;
+        color:#fff;
+        background-color: #253b48;     
+        margin:0.5rem 0.1rem 1.5rem;   
+        padding:0;
+        text-transform: uppercase;
+      }      
+    </style> 
+  </head>
+  <body>
+    <amp-analytics type="googleanalytics">
+    <script type="application/json">
+    {
+      "vars": {
+        "account": "UA-103053267-1"
+      },
+      "triggers": {
+        "socialShares" : {
+          "on": "click",
+          "selector": "amp-social-share",
+          "request": "social"
+        }
+      }
+    }
+    </script>
+    </amp-analytics>
+
+    <h1>amp-analytics social tracking</h1>
+    <p>This example sends a social request to Google Analytics when a share button is tapped</p>
+
+    <amp-social-share type="twitter" width="60" height="44"
+      data-param-text="Hello Twitter World"
+      data-param-url="https://example.com/" on="tap:msg.show"
+      data-vars-social-action="tweet"
+      data-vars-social-network="twitter"
+      data-vars-social-target="https://example.com/"
+      role="button" tabIndex="">
+    </amp-social-share>
+
+    <amp-social-share type="linkedin" width="60" height="44"
+      data-param-text="Hello LinkedIn World"
+      data-param-url="https://example.com/"
+      data-vars-social-action="share"
+      data-vars-social-network="LinkedIn"
+      data-vars-social-target="https://example.com/"
+      role="button" tabIndex="">
+    </amp-social-share>
+
+    <div id="msg" hidden>
+      <p>An analytics event request was sent! Check the browser dev tools to see the request.</p>
+      <p>You should be able to see the event in Google Analytics under Behavior > Events > Overview (you'll need to use your own account id)</p>
+    </div>
+
+  </body>
+</html>

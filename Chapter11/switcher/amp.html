@@ -1,0 +1,624 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch11/switcher/desktop.html" />
+    <title>The AMP Book | Using device detection to serve AMP</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|PT+Sans" rel="stylesheet"> 
+
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+
+    <style amp-custom>
+      html, body, ul {
+        margin:0;
+        padding:0;
+        font-family: 'Droid Serif', serif;
+      }
+      .header, .main-content, article, main {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      header {
+        background-color: #005689;
+        padding:0.5rem;
+      }
+
+      .logo {
+        text-align: right;
+        font-size:2.5rem;
+        color:#fff;
+        font-weight:bold;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      .logo::before {
+        content: 'AMP';
+        left: 0;
+        position: absolute;
+        float: left;
+        color: #024779;
+        font-family: 'PT Sans';
+      }
+
+
+      .primary-nav li, .primary-nav span, .primary-nav a {
+        font-family: 'PT Sans', sans-serif;
+        color:#fff;
+        font-size: 1.5rem;
+      }
+
+      .primary-nav a {
+        text-decoration:none;
+      }    
+
+      header li {
+        display: inline-block;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        padding-right: 10px;
+      }
+
+      h1 {
+        background-color: #eee;
+        color: #005689;
+        margin: 0;
+        padding:1rem 0.5rem;
+        font-family:Georgia, 'Times New Roman', serif;
+      }
+
+      h2 {
+        color: #005689;
+        margin: 0;
+        /*border-bottom: 1px solid #ddd;*/
+        margin:5px;
+      }
+
+      img.feature-img {
+        width: 100%;
+      }
+      p {
+        padding:0.5rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        color: #dcdcdc;
+        background: #484848;
+        padding:0.5rem;
+        height: 1rem;
+      }
+
+      footer a {
+        color: #dcdcdc;
+        text-decoration: none;
+      }
+
+      footer .left {
+        float:left;
+      } 
+
+      footer .right {
+        float:right;
+      } 
+
+      figure {
+        margin:5px;
+      }
+
+      figcaption {
+        font-family: Georgia;
+        font-weight: bold;
+      }
+
+      .related-thumb{
+        display:flex;
+        align-items: center;
+        flex-wrap:nowrap;
+      }
+
+      .related-thumb amp-img {
+        min-width: 125px;
+        margin: 0;
+      }
+
+
+      .author {
+        color: #bbb;
+        display:block;
+      }
+
+      @media (min-width:50.01rem){
+        figure {
+          margin:20px 40px;
+        }  
+
+        .related-thumb {
+          flex-basis:25%;
+          flex-wrap:wrap;
+        }
+
+        .related-thumb amp-img,.related-thumb figcaption
+        {-ms-flex-preferred-size:100%;flex-basis:100%}
+
+         .related-items li {
+          width:25%;
+        } 
+      }
+
+      @media (min-width:35rem) and (max-width:50rem){
+        figure {
+          margin:20px 40px;
+        }  
+
+        .related-thumb {
+          flex-basis:25%;
+          flex-wrap:wrap;
+        }
+
+        .related-thumb amp-img,.related-thumb figcaption
+        {-ms-flex-preferred-size:100%;flex-basis:100%}
+
+         .related-items li {
+          width:50%;
+        } 
+      }
+
+
+
+
+
+      .related-thumb amp-img {
+        margin-right:5px;
+      }
+
+      .related-items {
+        display:flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0.5rem 0 1rem 0;
+      }
+
+
+
+      .pull-quote-1{
+        font-size:1.5rem;
+        padding-left:1.5rem
+      }
+
+      .pull-quote-1::before {
+        content: '\00201C';
+        font-size: 8rem;
+        font-family: Georgia, serif;
+        position: absolute;
+        left: -0.5rem;
+        line-height: 7rem;
+        padding-left: 1rem;
+        color: #ff8c00;
+      }
+
+      svg.pull-quote {
+        fill:#f00;
+      }
+
+
+      .pull-parent {
+        display: flex;
+      }
+
+      .drop-caps::first-letter {
+        color: #903;
+        float: left;
+        font-family: Georgia;
+        font-size: 3.5rem;
+        line-height: 3rem;
+        padding-top: 5px;
+        padding-right: 8px;
+        padding-left: 3px;
+      }
+
+
+.amp-carousel-button {
+  background:0;
+}
+
+.amp-carousel-button-next {
+  right:0;
+}
+
+.amp-carousel-button-prev {
+  left:0;
+}
+
+.amp-carousel-button-next::after {
+  content: '⟩';
+  right:0;
+  text-align: right;
+  background:linear-gradient(to right, rgba(0,86,137,0) 0%,rgba(0,86,137,1) 50%);
+  color: #fff;
+  position: absolute;
+  bottom:0;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: bold;
+  width:20px;
+}
+
+.amp-carousel-button-prev::after {
+  content: '⟨';
+  left:0;
+  text-align:left;  
+  background:linear-gradient(to left, rgba(0,86,137,0) 0%,rgba(0,86,137,1) 50%);
+
+
+  color: #fff;
+  position: absolute;
+  bottom:0;
+  width:20px;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: bold;
+
+}  
+
+
+
+    .tab-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .tab-selector[selected] {
+        outline: none;
+        border:none;
+        /*border-top: 4px solid #000;*/
+        border-top: 1px solid #7faac4;
+        background: none;
+        box-shadow: none;
+        color: #005689;
+    }
+
+   .tab-selector[selected]:first-child {
+      border-right: 1px solid #7faac4;
+    }
+
+    .tab-selector[selected]:not(:first-child) {
+      border-left: 1px solid #7faac4;
+    }     
+    
+    .tab-selector {
+        list-style: none;
+        flex-grow: 1;
+        flex-basis:25%;
+        text-align: center;
+        cursor: pointer;
+        background-color: #eee;
+        font-size:1.25rem;
+        /*font-family: 'PT Sans', sans-serif;*/
+        font-family:Georgia, 'Times New Roman', serif;
+        /*color: #005689;*/
+        color: #7faac4;
+       /* color: #555;*/
+        font-weight:bold;
+/*font-family: Georgia, serif;*/
+        border-bottom: 1px solid #7faac4;
+        /*border-top: 4px solid #fff;*/
+        border-top: 2px solid #fff;
+        display: block;
+        
+        /*box-shadow: inset 0 1px 0 #bbb;*/
+        /*border-top: 4px solid #fff;*/
+       /* outline: 1px solid #f00;*/
+       padding:0.5rem;
+               background-color: #7faac4;
+        box-shadow: none;
+        /*color: #005689;*/
+        color:#fff;
+    }
+    
+    .tab-content {
+        display: none;
+        width: 100%;
+        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
+        /*border: 4px solid #ccc;*/
+        flex-basis: 100%;
+        padding-top:0.5rem;
+        
+    }
+    
+    .tab-selector[selected]+.tab-content {
+        display: block;
+    }
+
+
+  amp-selector {
+      padding: 0.5rem;
+
+    }
+
+    amp-selector [option][selected] {
+      outline: 0;
+    }
+
+
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="header">
+        <div class="logo">theampbook</div>
+        <nav>
+        
+          <amp-carousel height="1.8rem"
+          layout="fixed-height"
+          controls
+          type="carousel" class="primary-nav fade">
+
+            <span><a href="#">news</a></span>
+            <span><a href="#">sports</a></span>
+            <span><a href="#">arts</a></span>
+            <span><a href="#">tech</a></span>
+            <span><a href="#">education</a></span>
+            <span><a href="#">health</a></span>
+            <span><a href="#">entertainment</a></span>
+            <span><a href="#">living</a></span>
+            <span><a href="#">politics</a></span>       
+
+        </amp-carousel>
+
+        </nav>
+      </div>
+    </header>
+    <article>
+      <h1>Device Detection: AMP page</h1>
+      <amp-img src = "img/feature.jpg"  
+            srcset = "img/feature-1200.jpg 1200w,
+                      img/feature-lrg.jpg 1080w,
+                      img/feature-med.jpg 768w,
+                      img/feature.jpg 320w"
+             width = "768"
+            height = "305"
+            layout = "responsive" >
+            <amp-img placeholder
+                     src="img/feature-tiny.jpg"
+                     width="768"
+                     height="305"  
+                     layout="responsive">
+            </amp-img>
+      </amp-img>
+
+      <p class="drop-caps">This example uses device detection to decide whether to serve the AMP page or the desktop page to a device. This is the <strong>AMP page</strong>.
+      
+      <ol>
+        <li>If you visit this page on a mobile device, you should get the AMP version.</li>
+        <li>If you visit this page on a desktop browser, you should get the desktop version.</li>
+      </ol>
+      </p>
+      <amp-selector role="tablist"
+        layout="container"
+        class="tab-container">
+         <div role="tab"
+            class="tab-selector"
+           selected
+          option="a">Related content</div>
+<div role="tabpanel" class="tab-content">  
+  <ul class="related-items">
+         <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/penguin.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/penguin-sm.jpg 125w,
+                              img/penguin.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/penguin-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption>
+              World peace accord agreed
+              <span class="author">Joan Baez</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/cat.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/cat-sm.jpg 125w,
+                              img/cat.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/cat-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption>
+              New study: catz smrter than humanz
+              <span class="author">Mike Hat</span>            
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/swan.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/swan-sm.jpg 125w,
+                              img/swan.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/swan-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption>
+              Lost city of Atlantis found in Pacific Ocean
+              <span class="author">Steve Zissou</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/dog.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/dog-sm.jpg 125w,
+                              img/dog.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/dog-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption class="" >
+              Life on Mars confirmed
+              <span class="author">David Bowie</span>
+            </figcaption>
+          </figure>
+        </li>        
+
+            </ul>
+
+
+          </div>
+        <div role="tab"
+          class="tab-selector"
+          option="b">Most read</div>
+        <div role="tabpanel"
+          class="tab-content">
+            
+      <ul class="related-items">
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/dog.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/dog-sm.jpg 125w,
+                              img/dog.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/dog-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption class="" >
+              Charley is a mind-reading dog 
+              <span class="author">John Steinbeck</span>
+            </figcaption>
+          </figure>
+        </li>  
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/swan.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/swan-sm.jpg 125w,
+                              img/swan.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/swan-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption>
+              A snow-white swan with a scary tattoo holding a chain saw
+              <span class="author">Jim Benton</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/penguin.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/penguin-sm.jpg 125w,
+                              img/penguin.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/penguin-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption>
+              If a penguin can find a soul mate, I'm sure I can too
+              <span class="author">Rebekah Crane</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li>
+         <figure class="related-thumb">
+            <amp-img media = "(min-width: 35.01rem)"
+                       src = "img/cat.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive" 
+                    srcset = "img/cat-sm.jpg 125w,
+                              img/cat.jpg 640w">            
+            </amp-img>
+            <amp-img media = "(max-width: 35rem)"
+                       src = "img/cat-crop.jpg" 
+                     width = "125" 
+                    height = "75" 
+                    layout = "responsive">
+            </amp-img>
+            <figcaption>
+              What greater gift than the love of a cat
+              <span class="author">Charles Dickens</span>
+            </figcaption>
+          </figure>
+        </li>
+    
+
+      </ul>
+
+
+          </div>
+      </amp-selector>
+
+    
+    </article>
+
+    <footer>
+      <div class="main-content">    
+        <span class="left">privacy policy</span>
+        <span class="right"><a href="desktop.html">desktop view</a></span>
+      </div>
+    </footer>
+  </body>
+</html>

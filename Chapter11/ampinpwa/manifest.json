@@ -1,0 +1,22 @@
+{
+  "name": "The AMP Book | AMP in PWA",
+  "short_name": "AMP in PWA",
+  "description": "The AMP Book | AMP in PWA Pattern",
+  "icons": [
+    {
+      "sizes": "192x192",
+      "type": "image/png",
+      "src": "icon-192.png"
+    },
+    {
+      "sizes": "512x512",
+      "type": "image/png",
+      "src": "icon-512.png"
+    }
+  ],
+  "scope": "https://theampbook.com/ch11/ampinpwa/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#005689",
+  "start_url": "pwa.html"
+}

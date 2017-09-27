@@ -1,0 +1,59 @@
+<!-- Demonstrates Google Map (JavaScript API) embedded with amp-iframe, full screen map -->
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <link rel="canonical" href="https://theampbook.com/ch9/iframe-geomap-full.html" />
+    <title>The AMP Book</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    <style amp-custom>
+      html {overflow:hidden;}
+      body {
+        height:100%;
+        overflow-y:scroll;
+        width:100%;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Arial;
+      }
+      .fullsize {
+        position:fixed;
+        width:100%;
+        height:calc(100% - 50px);
+        top:50px;
+      }
+      .header {
+        position:fixed;
+        height: 50px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.85);;
+        z-index:9999;
+        box-shadow: 0px 2px 6px rgba(0,0,0,.3);
+      }
+      h1 {
+        font-size:1.2rem;
+        color: #253b48;  
+        margin: 10px 0 0 0;
+      }
+    </style>          
+  </head>
+  <body>
+    <div class="header">
+      <h1>amp-iframe geolocation</h1>
+    </div>  
+    <amp-iframe class="fullsize" layout="fill"
+                allowfullscreen
+                sandbox="allow-scripts allow-same-origin"
+                src="https://alt.theampbook.com/ch9/geomap.html">
+
+      <amp-img layout="fill"
+               src="img/placeholder.png"
+               placeholder></amp-img>
+
+    </amp-iframe>
+
+  </body>
+</html>
